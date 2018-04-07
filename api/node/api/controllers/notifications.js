@@ -20,8 +20,8 @@ module.exports = {
 function getUserId(req){
   var header = req.header("authorization");
   var token = req.header("authorization").split(" ")[1];
-  var email = getEmailFromToken(token);
-  var userId = getUserIdFromEmail(email);
+  var email = global.getEmailFromToken(token);
+  var userId = global.getUserIdFromEmail(email);
   return userId;
 }
 
