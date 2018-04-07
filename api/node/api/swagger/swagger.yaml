@@ -295,6 +295,9 @@ definitions:
         type: integer
         format: int64
         description: The maximum number of search results to return.
+      getNotifications:
+        type : boolean
+        description: Do you want to get email alerts when a post is created or modified and matches your search.
   User:
     type: object
     required:
