@@ -19,8 +19,12 @@ module.exports = {
 // Endpoint implementations
 
 function addNotification(req, res) {
-  var userId = "5ac8ae15982abe65368ca658"
-  
+  //var userId = "5ac8ae15982abe65368ca658";
+  var header = req.header("authorization");
+  var token = header.
+  var email = getEmailFromToken(req.header("authorization").split(" ")[1]); 
+  var userId = getUserIdFromEmail(email);
+
   var notification = Notification(req.body);
   notification.userId = userId;
   console.log(util.inspect(req.body));
