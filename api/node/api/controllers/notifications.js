@@ -6,7 +6,7 @@
 const util = require('util');
 const mongoose = require('mongoose');
 
-const Search = mongoose.models.Search;
+const Notification = mongoose.models.Notification;
 
 // Set up the autoincrement for trackID
 // Expose API endpoints
@@ -28,7 +28,7 @@ function addNotification(req, res) {
     }
     return Promise.resolve(false);
   }).then( function (data) {
-    return user.save();
+    return notification.save();
   }).then( function (data) {
     res.status(200).end(); // No body will be sent
   }).catch( function (error) {
