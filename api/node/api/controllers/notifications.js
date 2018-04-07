@@ -12,7 +12,6 @@ const Search = mongoose.models.Search;
 // Expose API endpoints
 module.exports = {
   addNotification: addNotification,
-  updateNotification: updateNotification,
   deleteNotification: deleteNotification,
   listNotifications: listNotifications,
 };
