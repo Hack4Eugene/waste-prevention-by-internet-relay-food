@@ -325,11 +325,7 @@ definitions:
         type: array
         description: The notifications that matched the query.
         items:
-          type: object
-          properties:
-            userId:
-              type: string
-              description: User that is searching.... actually should just reference notification....
+          $ref: '#/definitions/Notification'
   Notification:
     type : object
     properties:
