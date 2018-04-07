@@ -33,4 +33,3 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
   app.listen(port);
 
 });
-
