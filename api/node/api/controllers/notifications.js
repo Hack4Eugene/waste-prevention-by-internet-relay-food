@@ -22,7 +22,7 @@ function addNotification(req, res) {
   userId = "5ac8ae15982abe65368ca658"
   
   const notification = Notification(req.body);
-  Notification.findOne({ searchQuery: notification.searchQuery, userId: notification.userId }).then( function (existing) {
+  Notification.findOne({ searchQuery: notification.searchQuery, userId: userId }).then( function (existing) {
     if (existing) {
       throw "Search query '" + notification.searchQuery + "' already exists.";
     }
