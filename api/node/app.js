@@ -36,7 +36,7 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
 
 });
 
-function getEmailFromToken(token, res, authHeader) {
+global.getEmailFromToken = function(token, res, authHeader) {
   if (!authHeader) {
    res.status(403).send('No authorization header received');
    return "error";
@@ -58,4 +58,9 @@ function getEmailFromToken(token, res, authHeader) {
   console.log("returning:", t.email)
   return t.email
 
-}
+};
+
+global.getUserIdFromEmail = function (email){
+  var user = User.findOne({email : email});
+  return user.userId;
+};
