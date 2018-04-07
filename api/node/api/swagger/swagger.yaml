@@ -304,11 +304,11 @@ definitions:
       userId:
         type: string
         description: User to search for.
-    offset:
+      offset:
         type: integer
         format: int64
         description: The offset into the search results.
-    limit:
+      limit:
         type: integer
         format: int64
         description: The maximum number of search results to return.
