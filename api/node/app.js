@@ -42,7 +42,7 @@ global.getEmailFromToken = function(token) {
  
   
  console.log(token);
- jwt.verify(token, authKey, { "algorithms": [ "HS256" ], "issuer": "https://irf.auth0.com/"}, function (err, decoded) {
+ jwt.verify(token, authKey, { "algorithms": [ "RS256" ], "issuer": "https://irf.auth0.com/"}, function (err, decoded) {
    if (err) {
      console.log(err);
      //res.status(403).send('Error processing token: ' + util.inspect(err));
