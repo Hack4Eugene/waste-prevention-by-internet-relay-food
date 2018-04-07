@@ -15,6 +15,25 @@ paths:
       tags:
         - Notifications
       summary: what goes here?
+      operationId : listNotification
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: offset
+          type: integer
+          description: How many posts to skip.
+        - in: query
+          name: limit
+          type: integer
+          description: The maximum nubmer of posts to return.
+      responses:
+        '200':
+          description: Success.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Post'
   /posts:
     x-swagger-router-controller: posts
     get:
