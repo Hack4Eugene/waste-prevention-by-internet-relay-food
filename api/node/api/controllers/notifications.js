@@ -6,7 +6,7 @@
 const util = require('util');
 const mongoose = require('mongoose');
 
-const Search = mongoose.models.Search;
+const Notification = mongoose.models.Notification;
 
 // Set up the autoincrement for trackID
 // Expose API endpoints
