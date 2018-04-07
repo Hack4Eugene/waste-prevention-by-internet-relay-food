@@ -33,3 +33,11 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
   app.listen(port);
 
 });
+
+const jwt = require("jsonwebtoken");
+
+function getEmailFromToken(token) {
+  var t = jwt.decode(token)
+  console.log(t)
+  return "mel.stanley@gmail.com"
+}

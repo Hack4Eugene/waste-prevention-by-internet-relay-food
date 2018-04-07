@@ -57,7 +57,7 @@ paths:
     post:
       tags:
         - Notifications
-      summary: add a notification.
+      summary: Add a notification.
       operationId: addNotification
       parameters: []
       responses:
