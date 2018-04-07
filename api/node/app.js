@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 // Note that the order is important.  Some models depend on other models.
 require('./api/models/user');
 require('./api/models/post');
+require('./api/models/notification');
 
 mongoose.connect('mongodb://localhost/irf');
 

@@ -12,7 +12,6 @@ const Search = mongoose.models.Search;
 // Expose API endpoints
 module.exports = {
   addNotification: addNotification,
-  updateNotification: updateNotification,
   deleteNotification: deleteNotification,
   listNotifications: listNotifications,
 };
@@ -20,8 +19,10 @@ module.exports = {
 // Endpoint implementations
 
 function addNotification(req, res) {
+  var userId = "5ac8ae15982abe65368ca658"
+  
   const notification = Notification(req.body);
-  Notification.findOne({ searchQuery: notification.searchQuery, userId: notification.userId }).then( function (existing) {
+  Notification.findOne({ searchQuery: notification.searchQuery, userId: userId }).then( function (existing) {
     if (existing) {
       throw "Search query '" + notification.searchQuery + "' already exists.";
     }
@@ -35,14 +36,12 @@ function addNotification(req, res) {
   });
 }
 
-function updateNotification(req, res) {
-  // TODO: Permission check
-  // TODO: validation?
-  const notification = Notification(req.body);
-}
-
 function deleteNotification(req, res) {
   // TODO: We need to look up the user from the auth token
+  userId = "5ac8ae15982abe65368ca658"
+
+
+
   let searchQuery = req.swagger.params.searchQuery.value;
   if (searchQuery == null) {
     res.status(400).send('No search query specified.');
@@ -67,6 +66,9 @@ function deleteNotification(req, res) {
 
 function listNotifications(req, res) {
   // TODO: Get user email from the auth token, look up the user so we can get the ID
+  userId = "5ac8ae15982abe65368ca658"
+
+
   if (userId == null) {
     res.status(400).send('No user ID specified.');
     return;
