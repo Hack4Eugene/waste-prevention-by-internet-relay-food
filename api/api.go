@@ -12,6 +12,7 @@ import (
 )
 
 
+
 // Searches the description and title of all offers which are still pending
 // and contain the search string as a substring of the title or description.
 func GetAllOffersByText(searchString string, s *mgo.Session){
