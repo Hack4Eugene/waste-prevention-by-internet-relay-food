@@ -35,3 +35,27 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
   app.listen(port);
 
 });
+
+function getEmailFromToken(token, res, authHeader) {
+  if (!authHeader) {
+   res.status(403).send('No authorization header received');
+   return "error";
+ }
+  var parts = authHeader.split(" ");
+  if (parts.length < 2) {
+   res.status(403).send('Invalid authorization header');
+   return "error";
+  }
+  var token = parts[1];
+  console.log("Auth Token: " + token);
+  jwt.verify(token, authKey, { "algorithms": [ "HS256" ], "issuer": "https://irf.auth0.com/"}, function (err, decoded) {
+   if (err) {
+     res.status(403).send('Error processing token: ' + util.inspect(err));
+     return "error";
+   }
+  })
+  var t = jwt.decode(token)
+  console.log("returning:", t.email)
+  return t.email
+
+}
