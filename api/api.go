@@ -20,11 +20,10 @@ func GetAllOffersByText(searchString string, s *mgo.Session){
   defer session.Close()
   // assumes database name "irf"
   posts := session.DB("irf").C("Posts")
-  // let's just do title for now...
+
   // will this return multiple times if a title matches more than once, etc?
-  titleResults := posts.find({"Title" : {$regex : ".*" + searchString + ".*"}});
-  descriptionResults := posts.find({"Description" : {$regex : ".*" + searchString + ".*"}});
+  results = posts.find({$or : [{"Title" : {$regex : ".*" + searchString + ".*"}},{"Description" : {$regex : ".*" + searchString + ".*"}}]})
 
   // Go complains if you don't use a variable, use _ if you aren't ever going to use it
-  fmt.Println(titleResults)
+  fmt.Println(results)
 }
