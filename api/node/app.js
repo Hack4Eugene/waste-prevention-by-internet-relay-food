@@ -50,7 +50,7 @@ global.getEmailFromToken = function(token) {
  //  }
  // })
  
- var t = jwt.decode(token,, {complete: true});
+ var t = jwt.decode(token, {complete: true});
  return t.email; //console.log("returning:", t.email);
 
 };
