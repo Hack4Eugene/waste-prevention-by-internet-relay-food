@@ -110,15 +110,26 @@ paths:
           description: Success.
     delete:
       tags:
-        - Posts
-      summary: Remove a post.
-      operationId: deletePost
+        - Notifications
+      summary: deletes all notifications that a user is set to receieve
+      operationId: deleteAllNotifications
+      parameters: []
+      responses:
+        '200':
+          description: Success.
+  '/notifications/{searchQuery}':
+    x-swagger-router-controller: notifications
+    delete:
+      tags:
+        - Notifications
+      summary: Remove a notification.
+      operationId: deleteNotification
       parameters: []
       responses:
         '200':
           description: Success.
     parameters:
-      - name: postId
+      - name: searchQuery
         in: path
         required: true
         type: string
