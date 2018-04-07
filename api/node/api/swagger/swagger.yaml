@@ -34,6 +34,15 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Notification'
+    delete:
+      tags:
+        - Notifications
+      summary: deletes all notifications that a user is set to receieve
+      operationId: deleteNotification
+      parameters: []
+      responses:
+        '200':
+          description: Success.
   /posts:
     x-swagger-router-controller: posts
     get:
