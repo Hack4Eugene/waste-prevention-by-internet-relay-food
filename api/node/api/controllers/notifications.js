@@ -21,7 +21,7 @@ module.exports = {
 function addNotification(req, res) {
   var userId = "5ac8ae15982abe65368ca658"
   
-  notification = Notification(req.body);
+  var notification = Notification(req.body);
   notification.userId = userId;
   console.log(util.inspect(req.body));
   console.log(util.inspect(notification));
