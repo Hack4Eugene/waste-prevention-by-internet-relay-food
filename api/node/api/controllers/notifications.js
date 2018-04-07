@@ -19,7 +19,7 @@ module.exports = {
 // Endpoint implementations
 
 function addNotification(req, res) {
-  userId = "5ac8ae15982abe65368ca658"
+  var userId = "5ac8ae15982abe65368ca658"
   
   const notification = Notification(req.body);
   Notification.findOne({ searchQuery: notification.searchQuery, userId: userId }).then( function (existing) {
