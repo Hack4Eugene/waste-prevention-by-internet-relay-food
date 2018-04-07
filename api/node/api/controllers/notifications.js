@@ -20,7 +20,7 @@ module.exports = {
 
 function addNotification(req, res) {
   var userId = "5ac8ae15982abe65368ca658"
-  
+
   const notification = Notification(req.body);
   console.log(util.inspect(req.body));
   console.log(util.inspect(notification));
@@ -41,8 +41,6 @@ function addNotification(req, res) {
 function deleteNotification(req, res) {
   // TODO: We need to look up the user from the auth token
   userId = "5ac8ae15982abe65368ca658"
-
-
 
   let searchQuery = req.swagger.params.searchQuery.value;
   if (searchQuery == null) {

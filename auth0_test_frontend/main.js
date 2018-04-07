@@ -6,7 +6,7 @@ window.addEventListener('load', function() {
     responseType: 'token id_token',
     audience: 'https://irf.auth0.com/api/v2/',
     scope: 'openid email profile',
-    redirectUri: "http://localhost:10100/"
+    redirectUri: "http://localhost:8080/callback.html"
   });
 
   var loginBtn = document.getElementById('btn-login');
