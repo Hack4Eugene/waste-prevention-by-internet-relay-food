@@ -28,7 +28,7 @@ function addNotification(req, res) {
     }
     return Promise.resolve(false);
   }).then( function (data) {
-    return user.save();
+    return notification.save();
   }).then( function (data) {
     res.status(200).end(); // No body will be sent
   }).catch( function (error) {
