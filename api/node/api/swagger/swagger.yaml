@@ -1,0 +1,363 @@
+swagger: '2.0'
+info:
+  description: ''
+  version: 1.0.0
+  title: Food Rescue API
+  contact: {}
+host: 'food.dlfsystems.com:10100'
+basePath: /
+schemes:
+  - http
+paths:
+  /posts:
+    x-swagger-router-controller: posts
+    get:
+      tags:
+        - Posts
+      summary: Get the most recent posts.
+      operationId: listPosts
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: offset
+          type: integer
+          description: How many posts to skip.
+        - in: query
+          name: limit
+          type: integer
+          description: The maximum nubmer of posts to return.
+      responses:
+        '200':
+          description: Success.
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Post'
+    post:
+      tags:
+        - Posts
+      summary: Create a post.
+      operationId: addPost
+      consumes:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Post'
+      responses:
+        '200':
+          description: Post created.
+  '/posts/{postId}':
+    x-swagger-router-controller: posts
+    get:
+      tags:
+        - Posts
+      summary: Get a post using its id.
+      operationId: getPost
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: Success.
+          schema:
+            $ref: '#/definitions/Post'
+    put:
+      tags:
+        - Posts
+      summary: Update a post.
+      operationId: updatePost
+      parameters: []
+      responses:
+        '200':
+          description: Success.
+    delete:
+      tags:
+        - Posts
+      summary: Remove a post.
+      operationId: deletePost
+      parameters: []
+      responses:
+        '200':
+          description: Success.
+    parameters:
+      - name: postId
+        in: path
+        required: true
+        type: string
+  /posts/search:
+    x-swagger-router-controller: posts
+    post:
+      tags:
+        - Posts
+      summary: Search posts
+      description: Search for posts
+      operationId: search
+      consumes:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/SearchRequest'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/SearchResponse'
+  '/posts/upload/{hash}':
+    x-swagger-router-controller: posts
+    get:
+      tags:
+        - Posts
+      summary: Get upload data.
+      description: Fetches the necessary info to upload a new file to S3.  If the hash exists we will return an error, otherwise we will try to fetch the info we need from S3 for a signed POST request to upload the file.
+      operationId: validateUpload
+      parameters: []
+      responses:
+        '200':
+          description: The hash does not exist and we were able to get a signed POST request from S3.
+          schema:
+            $ref: '#/definitions/UploadInfo'
+        '400':
+          description: No hash value was provided.
+          schema:
+            type: string
+        '409':
+          description: The given hash already exists in the database.
+          schema:
+            type: string
+    parameters:
+      - name: hash
+        in: path
+        required: true
+        type: string
+  /users:
+    x-swagger-router-controller: users
+    post:
+      tags:
+        - Users
+      summary: Add a user.
+      operationId: addUser
+      consumes:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '200':
+          description: Success.
+        '400':
+          description: Invalid request.
+          schema:
+            type: string
+  '/users/{userId}':
+    x-swagger-router-controller: users
+    get:
+      tags:
+        - Users
+      summary: Look up a user by their user id.
+      operationId: getUser
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: Success.
+          schema:
+            $ref: '#/definitions/User'
+    put:
+      tags:
+        - Users
+      summary: Update a user.
+      operationId: updateUser
+      consumes:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '200':
+          description: Status 200
+    delete:
+      tags:
+        - Users
+      summary: Delete a user.
+      operationId: deleteUser
+      parameters: []
+      responses:
+        '204':
+          description: User deleted.
+    parameters:
+      - name: userId
+        in: path
+        required: true
+        type: string
+  '/users/email/{email}':
+    x-swagger-router-controller: users
+    get:
+      tags:
+        - Users
+      summary: Look up a user by email address.
+      operationId: getUserByEmail
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Success.
+          schema:
+            $ref: '#/definitions/User'
+    parameters:
+      - name: email
+        in: path
+        required: true
+        type: string
+definitions:
+  Post:
+    type: object
+    properties:
+      _id:
+        type: string
+        description: The MongoDB ID.
+      creationDate:
+        type: string
+        description: When the post was created in ISO date format.
+      user:
+        $ref: '#/definitions/User'
+      title:
+        type: string
+        description: The title for the post.
+      status:
+        type: string
+        enum: [ "available", "claimed", "picked up" ]
+        description: Whether the food is available, claimed, or picked up.
+      eligibility:
+        type: array
+        items:
+          type: string
+          enum: [ "business", "non-profit", "individual" ]
+        description: Who is allowed to pick up this food.
+      amount:
+        type: string
+        description: How much of the food is available.
+      readiness:
+        type: string
+        enum: [ "harvestable", "packable", "packed" ]
+        description: What is required to take the food away.
+      description:
+        type: string
+        description: Details about the food.
+      pickupWindow:
+        type: string
+        description: When the food can be picked up.
+      pickupAddress:
+        type: string
+        description: Where to pick up the food.
+    description: A description of an available food item.
+  SearchResponse:
+    type: object
+    required:
+      - matchCount
+    properties:
+      matchCount:
+        type: integer
+        format: int64
+        description: The total number of tracks that matched the query.
+      matches:
+        type: array
+        description: The posts that matched the query.
+        items:
+          $ref: '#/definitions/Post'
+  SearchRequest:
+    type: object
+    properties:
+      title:
+        type: string
+        description: Post title to search for.
+      username:
+        type: string
+        description: User to search for.
+      offset:
+        type: integer
+        format: int64
+        description: The offset into the search results.
+      limit:
+        type: integer
+        format: int64
+        description: The maximum number of search results to return.
+  User:
+    type: object
+    required:
+      - username
+      - email
+      - role
+    properties:
+      username:
+        type: string
+        description: The user's name.
+      email:
+        type: string
+        description: The user's email address.
+      role:
+        type: string
+        enum: [ "user", "moderator" ]
+        description: The user's role
+      created:
+        type: string
+        description: When this user was created, in ISO date format.
+  UploadInfo:
+    type: object
+    properties:
+      formAttributes:
+        $ref: '#/definitions/UploadFormAttributes'
+      formInputs:
+        $ref: '#/definitions/UploadFormInputs'
+    description: Credentials needed to upload a file to S3.
+  UploadFormAttributes:
+    type: object
+    properties:
+      action:
+        type: string
+        description: The URL to submit the form to.
+      method:
+        type: string
+        description: The HTTP verb to use.  Will probably be POST.
+      enctype:
+        type: string
+        description: The encoding the form will use.  Probably multipart/form-data
+    description: Attributes needed for the form tag used to upload files to S3.
+  UploadFormInputs:
+    type: object
+    properties:
+      acl:
+        type: string
+        description: Access Control List spec.  Should be 'private'.
+      key:
+        type: string
+        description: The key the object will be stored under.  This should match the hash value that was submitted to the /tracks/upload/{hash} API call.
+      X-Amz-Credential:
+        type: string
+        description: The spec for the IAM key being used.
+      X-Amz-Algorithm:
+        type: string
+        description: The hash algorithm used.
+      X-Amz-Date:
+        type: string
+        description: Issue date.
+      Policy:
+        type: string
+        description: Encoded policy info.
+      X-Amz-Signature:
+        type: string
+        description: The sig for the request.
+    description: The form inputs we'll need when submitting a track to S3.
