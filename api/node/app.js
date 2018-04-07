@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 module.exports = app; // for testing
 
 const mongoose = require('mongoose');
-
+const User = mongoose.models.User;
 // Preload models so they can be read via mongoose downstream.
 // Note that the order is important.  Some models depend on other models.
 require('./api/models/user');

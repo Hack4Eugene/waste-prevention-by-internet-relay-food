@@ -43,6 +43,20 @@ paths:
       responses:
         '200':
           description: Success.
+    post:
+      tags:
+        - Notifications
+      summary: Add a notification.
+      operationId: addNotification
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/AddNotificationRequest'
+      responses:
+        '200':
+          description: Success.
   '/notifications/{searchQuery}':
     x-swagger-router-controller: notifications
     delete:
@@ -50,24 +64,14 @@ paths:
         - Notifications
       summary: Remove a notification.
       operationId: deleteNotification
-      parameters: []
-      responses:
-        '200':
-          description: Success.
-    post:
-      tags:
-        - Notifications
-      summary: Add a notification.
-      operationId: addNotification
-      parameters: []
-      responses:
-        '200':
-          description: Success.
-    parameters:
+      parameters:
       - name: searchQuery
         in: path
         required: true
         type: string
+      responses:
+        '200':
+          description: Success.
   /posts:
     x-swagger-router-controller: posts
     get:
@@ -351,9 +355,12 @@ definitions:
         type: integer
         format: int64
         description: The maximum number of search results to return.
-      getNotifications:
-        type : boolean
-        description: Do you want to get email alerts when a post is created or modified and matches your search.
+  AddNotificationRequest:
+    type: object
+    properties:
+      searchQuery:
+        type: string
+        description: The string to search for.
   GetAllNotificationsRequest:
     type : object
     properties:

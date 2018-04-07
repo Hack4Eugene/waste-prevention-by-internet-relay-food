@@ -17,11 +17,24 @@ module.exports = {
 };
 
 // Endpoint implementations
+function getUserId(req){
+  var header = req.header("authorization");
+  var token = req.header("authorization").split(" ")[1];
+  var email = global.getEmailFromToken(token);
+  var userId = global.getUserIdFromEmail(email);
+  return userId;
+}
 
 function addNotification(req, res) {
+<<<<<<< HEAD
   var userId = "5ac8ae15982abe65368ca658"
 
   const notification = Notification(req.body);
+=======
+  var userId = getUserId(req);
+  var notification = Notification(req.body);
+  notification.userId = userId;
+>>>>>>> b68d54b58a84aef9d318a8dfc7490f0e56385d7f
   console.log(util.inspect(req.body));
   console.log(util.inspect(notification));
   Notification.findOne({ searchQuery: notification.searchQuery, userId: userId }).then( function (existing) {
@@ -39,9 +52,7 @@ function addNotification(req, res) {
 }
 
 function deleteNotification(req, res) {
-  // TODO: We need to look up the user from the auth token
-  userId = "5ac8ae15982abe65368ca658"
-
+  var userId = getUserId(req);
   let searchQuery = req.swagger.params.searchQuery.value;
   if (searchQuery == null) {
     res.status(400).send('No search query specified.');
@@ -65,10 +76,7 @@ function deleteNotification(req, res) {
 }
 
 function listNotifications(req, res) {
-  // TODO: Get user email from the auth token, look up the user so we can get the ID
-  userId = "5ac8ae15982abe65368ca658"
-
-
+  var userId = getUserId(req);
   if (userId == null) {
     res.status(400).send('No user ID specified.');
     return;
