@@ -54,6 +54,15 @@ paths:
       responses:
         '200':
           description: Success.
+    post:
+      tags:
+        - Notifications
+      summary: add a notification.
+      operationId: addNotification
+      parameters: []
+      responses:
+        '200':
+          description: Success.
     parameters:
       - name: searchQuery
         in: path
