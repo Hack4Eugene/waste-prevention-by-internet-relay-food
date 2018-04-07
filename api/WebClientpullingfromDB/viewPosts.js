@@ -20,6 +20,7 @@ function returnGeoLocation(params){
     var results = JSON.parse(event.target.response);
     params.geo = results['results'][0]['geometry']['location'];
 
+// update the global marker
     mapMarkers.push(new google.maps.Marker({
        position: params.geo,
        map: mapManifest
@@ -31,41 +32,7 @@ function returnGeoLocation(params){
 
 }
 
-var db = [
-  { 'location': [ 46, 123 ],
-    'type': 'vegetable',
-    'food': 'beets',
-    'owner': 'n/a'
-  },
-  { 'location': [ 42, 123 ],
-    'type': 'vegetable',
-    'food': 'carrots',
-    'owner': 'n/a'
-  },
-  { 'location': [ 44, 126 ],
-    'type': 'vegetable',
-    'food': 'lettuce',
-    'owner': 'n/a'
-  },
-  { 'location': [ 44, 120 ],
-    'type': 'vegetable',
-    'food': 'cucumber',
-    'owner': 'n/a'
-  },
-  { 'location': [ 44, 120 ],
-    'type': 'meat',
-    'food': 'bacon',
-    'owner': 'n/a'
-  },
-  { 'location': [ 47, 126 ],
-    'type': 'fruit',
-    'food': 'orange',
-    'owner': 'n/a'
-  }
-];
-
-
-function catchJustOne(postID){
+function populateSpecificID(postID){
 
   var getURL = "http://food.dlfsystems.com:10100/posts/";
 
@@ -79,15 +46,14 @@ function catchJustOne(postID){
   //this time we add all the returned items to the map.
   getQuery.addEventListener('load',function(event){
     if(event.target.status !== 200){
-      console.log("!not found")
-      console.log(event.target)
       console.log(event.target.response);
     }
-    console.log(event.target.response);
-    var results = JSON.parse(event.target.response);
-    console.log("here is our database: ",results);
-    addtoGlobMap(results.results);
-    highlightedPost = results;
+    else{
+      var results = JSON.parse(event.target.response);
+      console.log("here is our database: ",results);
+      addtoGlobMap(results);
+      highlightedPost = results;
+    }
 
   });
   // here we create the body to send to the server for confirmation
@@ -96,22 +62,6 @@ function catchJustOne(postID){
   // end the post request ..
 
 }
-
-
-// var post0 = {
-// 'userid': '584bc9ba420a6b189c510af6',
-//   "creationDate": "2018-04-20",
-//    "title": "are ye hungry for fun?",
-//   "status": "available",
-//   "eligibility": [
-//     "business"
-//   ],
-//   "amount": "20",
-//   "readiness": "harvestable",
-//   "description": "a primetime showcase of fun!",
-//   "pickupWindow": "Thursday 4/12, 10-2",
-//   "pickupAddress": "1290 Oak St, Eugene, OR"
-// }
 
 function addSponsor(params){
 
@@ -143,7 +93,7 @@ inputs: params = {
   ..
 }
 */
-function mapQuerySelector(params){
+function populateQuery(params){
 // create the post request
 
 
@@ -178,11 +128,14 @@ function sendQuerytoDB(){
     'getNotifications': true
   };
 
-  mapQuerySelector(queries);
+  populateQuery(queries);
 
 }
 
 
+/*
+
+*/
 function populateMostRecent(){
   getRecent = new XMLHttpRequest();
   // create the post request
