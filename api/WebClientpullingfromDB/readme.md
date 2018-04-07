@@ -1,11 +1,13 @@
 ####  instructions for use ####
-1.first link the fnctionality script,
-2. async defer link the google.js script
-3. async defer the api key:
-''' <script async defer
+1. first link the fnctionality script,  
+2. async defer link the google.js script  
+3. async defer the api key:  
+```
+<script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuUJl43vI8auaFBkq5WDQC5rF-FV71hK4&callback=initMap">
     console.log("we are reading the api now!");
-    </script> '''
+    </script> 
+```
 
 ## Key entities right now: ##
 
