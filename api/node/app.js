@@ -47,7 +47,7 @@ global.getEmailFromToken = function (token) {
 
 
 global.getUserIdFromEmail = function (email){
-  user = User.findOne({email : email});
+  var user = User.findOne({email : email});
   return user.userId;
 };
 
