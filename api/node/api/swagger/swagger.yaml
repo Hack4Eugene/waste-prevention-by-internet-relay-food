@@ -312,7 +312,6 @@ definitions:
         type: integer
         format: int64
         description: The maximum number of search results to return.
-
   User:
     type: object
     required:
