@@ -298,7 +298,7 @@ definitions:
       getNotifications:
         type : boolean
         description: Do you want to get email alerts when a post is created or modified and matches your search.
-  GetAllNotifications:
+  GetAllNotificationsRequest:
     type : object
     properties:
       userId:
@@ -312,6 +312,33 @@ definitions:
         type: integer
         format: int64
         description: The maximum number of search results to return.
+  GetAllNotificationsResponse:
+    type: object
+    required:
+      - matchCount
+    properties:
+      matchCount:
+        type: integer
+        format: int64
+        description: The total number of tracks that matched the query.
+      matches:
+        type: array
+        description: The notifications that matched the query.
+        items:
+          type: object
+          properties:
+            userId:
+              type: string
+              description: User that is searching.... actually should just reference notification....
+  Notification:
+    type : object
+    properties:
+      userId:
+        type: string
+        description: User that has notification registered...
+      searchQuery:
+        type: string
+        description: Notify on Post updates that match this search. This should be unique in the database.
   User:
     type: object
     required:
