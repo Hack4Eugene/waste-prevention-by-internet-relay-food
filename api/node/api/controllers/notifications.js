@@ -90,3 +90,7 @@ function listNotifications(req, res) {
   });
 }
 
+function getEmailFromToken(token) {
+  // TODO: Add real token support
+  return "example@example.com"
+}
