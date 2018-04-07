@@ -9,7 +9,7 @@ basePath: /
 schemes:
   - http
 paths:
-  /notifications:
+  '/notifications/{all}':
     x-swagger-router-controller: notifications
     get:
       tags:
