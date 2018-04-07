@@ -9,6 +9,12 @@ basePath: /
 schemes:
   - http
 paths:
+  /notifications:
+    x-swagger-router-controller: notifications
+    get:
+      tags:
+        - Notifications
+      summary: what goes here?
   /posts:
     x-swagger-router-controller: posts
     get:
