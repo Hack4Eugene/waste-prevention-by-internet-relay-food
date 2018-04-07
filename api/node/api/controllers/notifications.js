@@ -26,15 +26,9 @@ function getUserId(req){
 }
 
 function addNotification(req, res) {
-<<<<<<< HEAD
-  var userId = "5ac8ae15982abe65368ca658"
-
-  const notification = Notification(req.body);
-=======
   var userId = getUserId(req);
   var notification = Notification(req.body);
   notification.userId = userId;
->>>>>>> b68d54b58a84aef9d318a8dfc7490f0e56385d7f
   console.log(util.inspect(req.body));
   console.log(util.inspect(notification));
   Notification.findOne({ searchQuery: notification.searchQuery, userId: userId }).then( function (existing) {
