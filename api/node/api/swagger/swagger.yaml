@@ -284,7 +284,7 @@ definitions:
       title:
         type: string
         description: Post title to search for.
-      username:
+      userId:
         type: string
         description: User to search for.
       offset:
@@ -298,6 +298,21 @@ definitions:
       getNotifications:
         type : boolean
         description: Do you want to get email alerts when a post is created or modified and matches your search.
+  GetAllNotifications:
+    type : object
+    properties:
+      userId:
+        type: string
+        description: User to search for.
+    offset:
+        type: integer
+        format: int64
+        description: The offset into the search results.
+    limit:
+        type: integer
+        format: int64
+        description: The maximum number of search results to return.
+
   User:
     type: object
     required:
