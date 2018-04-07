@@ -340,12 +340,9 @@ definitions:
   SearchRequest:
     type: object
     properties:
-      title:
+      query:
         type: string
-        description: Post title to search for.
-      userId:
-        type: string
-        description: User to search for.
+        description: Text to search for.
       offset:
         type: integer
         format: int64
