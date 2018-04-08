@@ -23,7 +23,7 @@
     <div class="container">
 
       <!-- Brand -->
-      <a class="navbar-brand" href="https://mdbootstrap.com/material-design-for-bootstrap/" target="_blank">
+      <a class="navbar-brand" href="/" target="_blank">
         <strong>Food Rescue</strong>
       </a>
 
@@ -39,7 +39,7 @@
         <!-- Left -->
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home
+            <a class="nav-link" href="index.html">Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -61,8 +61,7 @@
         <ul class="navbar-nav nav-flex-icons">
 
           <li class="nav-item">
-            <a href="SignUp.html" class="nav-link border border-light rounded"
-              target="_blank">
+            <a class="nav-link border border-light rounded signup-button">
               Sign Up
             </a>
           </li>
@@ -77,7 +76,7 @@
 
 
   <!--Carousel Wrapper-->
-  <div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
+  <div id="homepage-carousel" class="carousel slide carousel-fade" data-ride="carousel">
 
 
     <!--Slides-->
@@ -96,9 +95,9 @@
                 <strong>Put food on the table, not in the landfill</strong>
               </h1>
 
-              <a target="_blank" href="SignUp.html" class="btn btn-outline-white btn-lg">Sign Up
+              <a id="signup-button" class="btn btn-outline-white btn-lg">Sign Up
               </a>
-              <a target="_blank" href="Login.html" class="btn btn-outline-white btn-lg">Log In
+              <a id="login-button" class="btn btn-outline-white btn-lg">Log In
               </a>
 
               <h1 class="mb-4">
@@ -124,7 +123,7 @@
   </div>
   <!--/.Carousel Wrapper-->
 
-    <!-- SCRIPTS -->
+  <!-- SCRIPTS -->
     <!-- JQuery -->
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap tooltips -->
@@ -133,11 +132,24 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="js/mdb.min.js"></script>
+    <script src="https://cdn.auth0.com/js/auth0/9.3.1/auth0.min.js"></script>
       <!-- Initializations -->
   <script type="text/javascript">
     // Animations initialization
     new WOW().init();
-  </script>
+  </script>  
+  
+    <script type="text/javascript" src="js/User.js"></script>
+
+<script type="text/javascript">
+    $(document).ready( function () {
+        $("#login-button").click(() => {
+          LoginUser();
+          e.preventDefault();
+        });
+    } );
+</script>
+  
 </body>
 
 </html>

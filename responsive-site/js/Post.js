@@ -1,33 +1,33 @@
 
-function CreatePost(title, weight, location, expirationDate) {
+function CreatePost(title, amount, description, pickupWindow, pickupAddress) {
 // get the form data
-
-      $("#myModal").show();
-
         // there are many ways to get this data using jQuery (you can use the class or id also)
         var formData = {
-            'firstName': firstName,
-            'lastName': lastName,
-            'email': email,
-            'password': password
+            'title': title,
+            'status': 'available',
+            'eligibility': [ "business" ],
+            'amount': amount,
+            'readiness': "harvestable",
+            'description': description,
+            'pickupWindow': pickupWindow,
+            'pickupAddress': pickupAddress,
+            'creationDate': Date.now(),
+            'user': '5ac8ae15982abe65368ca658'
         };
 
         // process the form
         $.ajax({
             type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
-            url         : '/User/Create', // the url where we want to POST
+            url         : 'food.dlfsystems.com:10100', // the url where we want to POST
             data        : formData, // our data object
             dataType    : 'json', // what type of data do we expect back from the server
-            encode          : true
-        })
-            // using the done promise callback
-            .done(function(data) {
-
-                // log data to the console so we can see
-                console.log(data);
-
-                // here we will handle errors and validation messages
-            });
+            encode          : true,
+            success: function(msg){
+                alert( "Data Saved: " + msg );
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("some error");
+            }});
 
           }
 

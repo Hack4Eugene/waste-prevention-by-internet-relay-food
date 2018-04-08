@@ -40,6 +40,11 @@
 
         <!-- Left -->
         <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">Home
+                  <span class="sr-only">(current)</span>
+                </a>
+              </li>
             <li class="nav-item">
               <a class="nav-link" href="TheMarket.html">The Market</a>
             </li>
@@ -134,14 +139,14 @@
                     <div class="form-group row">
                         <label class="col-sm-3">Pickup Window</label>
                         <div class="col-sm-9">
-                          <input id="title" type="text" placeholder="" class="form-control form-control-success"><small class="form-text"></small>
+                          <input id="pickupWindow" type="text" placeholder="" class="form-control form-control-success"><small class="form-text"></small>
                         </div>
                     </div>
 
                     <div class="form-group row">
                       <label class="col-sm-3">Pickup Address</label>
                       <div class="col-sm-9">
-                        <input id="location" type="text" class="form-control form-control-warning"><small class="form-text"></small>
+                        <input id="pickupAddress" type="text" class="form-control form-control-warning"><small class="form-text"></small>
                       </div>
                     </div>
 
@@ -154,7 +159,7 @@
 
                     <div class="form-group row">
                       <div class="col-sm-9 offset-sm-3">
-                        <input type="submit" value="Create" class="btn btn-primary">
+                        <a id="submit" class="btn btn-primary">Create</a>
                       </div>
                     </div>
                   </form>
@@ -168,45 +173,7 @@
   <!--Main layout-->
 
   <!--Footer-->
-  <footer class="page-footer text-center font-small mt-4 wow fadeIn">
-
-    <hr class="my-4">
-
-    <!-- Social icons -->
-    <div class="pb-4">
-      <a href="https://www.facebook.com/mdbootstrap" target="_blank">
-        <i class="fa fa-facebook mr-3"></i>
-      </a>
-
-      <a href="https://twitter.com/MDBootstrap" target="_blank">
-        <i class="fa fa-twitter mr-3"></i>
-      </a>
-
-      <a href="https://www.youtube.com/watch?v=7MUISDJ5ZZ4" target="_blank">
-        <i class="fa fa-youtube mr-3"></i>
-      </a>
-
-      <a href="https://plus.google.com/u/0/b/107863090883699620484" target="_blank">
-        <i class="fa fa-google-plus mr-3"></i>
-      </a>
-
-      <a href="https://dribbble.com/mdbootstrap" target="_blank">
-        <i class="fa fa-dribbble mr-3"></i>
-      </a>
-
-      <a href="https://pinterest.com/mdbootstrap" target="_blank">
-        <i class="fa fa-pinterest mr-3"></i>
-      </a>
-
-      <a href="https://github.com/mdbootstrap/bootstrap-material-design" target="_blank">
-        <i class="fa fa-github mr-3"></i>
-      </a>
-
-      <a href="http://codepen.io/mdbootstrap/" target="_blank">
-        <i class="fa fa-codepen mr-3"></i>
-      </a>
-    </div>
-    <!-- Social icons -->
+  <footer class="page-footer text-center font-small mt-4 wow ">
 
     <!--Copyright-->
     <div class="footer-copyright py-3">
@@ -235,15 +202,20 @@
   <script src="vendor/dataTables/js/jquery.dataTables.min.js"></script>
   <!-- Main File-->
   <script src="js/front.js"></script>
-  <script src="js/Donation.js"></script>
+  <script src="js/Post.js"></script>
   <script src="js/User.js"></script>
 
   <script type="text/JavaScript">
     $(document).ready( function () {
-      $('#donationsTable').DataTable();
-      //CreateUser("testuser1", "test1@test.com", "Donor");
-
-    } );
+      $("#submit").click(() => {
+        var title = $("#title").val();
+        var amount = $("#amount").val();
+        var desc = $("#description").val();
+        var window = $("#pickupWindow").val();
+        var location = $("#pickupAddress").val();
+        CreatePost(title, amount, desc, window, location);
+      });
+    });
   </script>
 </body>
 
