@@ -15,6 +15,9 @@
     <!-- Your custom styles (optional) -->
     <link href="css/style.css" rel="stylesheet">
 
+
+    <script src="WebClientpullingfromDB/viewPosts.js"></script>
+
     <link rel="stylesheet" href="vendor/dataTables/css/jquery.dataTables.min.css">
 </head>
 
@@ -58,10 +61,10 @@
               <a class="nav-link" href="Help.html">Help</a>
             </li>
           </ul>
-  
+
           <!-- Right -->
           <ul class="navbar-nav nav-flex-icons">
-            
+
               <li class="nav-item">
                   <a href="Profile.html" class="nav-link border border-light rounded"
                     target="_blank">
@@ -139,7 +142,7 @@
                       <div class="col-sm-9">
                         <label id="status"></label><small class="form-text"></small>
                       </div>
-                  </div>    
+                  </div>
 
                   <div class="form-group row">
                     <div class="col-sm-12 text-center">
@@ -167,8 +170,7 @@
               <div class="card-header d-flex align-items-center">
                 <h4>Location</h4>
               </div>
-              <div class="card-body" id="donationMap">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d11470.757363904571!2d-123.10017264999998!3d44.048472350000004!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1523083932604" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+              <div class="card-body" id="map" style="height:500px;">
               </div>
             </div>
           </div>
@@ -193,6 +195,15 @@
   <!--/.Footer-->
 
     <!-- SCRIPTS -->
+
+    <script async defer src="WebClientpullingfromDB/google.js">
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuUJl43vI8auaFBkq5WDQC5rF-FV71hK4&callback=initMap">
+    </script>
+
+    <script defer>
+    </script>
+
     <!-- JQuery -->
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap tooltips -->

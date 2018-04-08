@@ -1,6 +1,14 @@
 var center = [ 44, 123 ];
 
-var highlightedPost = null
+var highlightedPost = null;
+
+function toggleBounce() {
+  if (marker.getAnimation() !== null) {
+    marker.setAnimation(null);
+  } else {
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+  }
+}
 
 //window.addEventListener('click',populateMap);
 
@@ -23,8 +31,10 @@ function returnGeoLocation(params){
 // update the global marker
     mapMarkers.push(new google.maps.Marker({
        position: params.geo,
+       title: params.title,
        map: mapManifest
      }));
+     //mapMarkers[mapMarkers.length-1].addListener('click',toggleBounce);
 
   });
   get_.send();
@@ -156,7 +166,7 @@ function populateMostRecent(){
 }
 
 function addtoGlobMap (item,index){
-  var params = { address: item['pickupAddress'], geo: null};
+  var params = { address: item['pickupAddress'], geo: null, title: item['description']+'\t\n'+item['pickupAddress']};
   returnGeoLocation(params);
 
 }
