@@ -7,6 +7,7 @@ const util = require('util');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const Post = mongoose.models.Post;
+const User = mongoose.models.User;
 
 const AWS = require('aws-sdk');
 var credentials = new AWS.SharedIniFileCredentials({profile: 'default'});
@@ -113,25 +114,44 @@ function getPost(req, res) {
      });
 }
 
+// Called before verification
 function addPost(req, res) {
     var authHeader = req.header("Authorization");
 
-    var email = getEmailFromToken(authHeader, req, res, authHeader, addPostVerifid)
+    var email = getEmailFromToken(authHeader, req, res, authHeader, addPostVerifid);
 }
 
+// Called after verification (of token) and only when verification happens
 global.addPostVerifid = function(req, res, email) {
   if (email == "error") {
-    return
+    return;
   }
 
-    const post = Post(req.body);
-    post.save(function (error) {
-      if (error) {
-        res.status(500).send('Error saving new post: ' + util.inspect(error));
+  var post = Post(req.body);
+
+   User.findOne({"email": email}, function(err, dat) {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    if (post == null || post == undefined || post == "") {
+      res.status(500).send('Error saving new post: No post body');
+      return
+    }
+    if (dat == null || dat == undefined) {
+      res.status(500).send('Error saving new post: Empty database');
+      return
+    }
+    post.userId = dat.userId;
+    post.save(function (err) {
+      if (err) {
+        res.status(500).send('Error saving new post: ' + util.inspect(err));
       } else {
         res.status(200).end(); // No body will be sent
       }
     });
+  });
+
 }
 
 function updatePost(req, res) {
