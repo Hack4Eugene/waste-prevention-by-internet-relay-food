@@ -104,7 +104,6 @@ function GetAllPosts() {
             allposts = response;
             allposts.forEach(addtoGlobMap);
             $('#donationsTable').DataTable({
-                "bPaginate": false,
                 data: response,
                 "columns": [
                     { "data": "title" },
@@ -145,7 +144,6 @@ function GetAllPosts() {
                 allposts = response;
                 allposts.forEach(addtoGlobMap);
                 $('#donationsTable').DataTable({
-                    "bPaginate": false,
                     data: response,
                     "columns": [
                         { "data": "title" },
