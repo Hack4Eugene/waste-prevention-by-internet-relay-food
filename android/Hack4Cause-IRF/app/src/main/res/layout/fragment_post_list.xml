@@ -8,13 +8,13 @@
     <ListView
         android:id="@+id/postListView"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="263dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@+id/imageButton"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/postListSearch" />
+        app:layout_constraintTop_toBottomOf="@+id/mapButton" />
 
     <include
         android:id="@+id/include"
@@ -39,14 +39,15 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include" />
 
-    <Button
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/postListAddPost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_gravity="bottom|end"
         android:onClick="addPostAction"
-        android:text="@string/add_post"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:tint="@android:color/white"
+        app:srcCompat="@android:drawable/ic_input_add"
+		app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/postListSearch" />
 
     <ImageButton
@@ -83,5 +84,15 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageButton"
         app:layout_constraintTop_toTopOf="@+id/imageButton" />
+
+    <Button
+        android:id="@+id/mapButton"
+        android:layout_width="fill_parent"
+        android:layout_height="20dp"
+        android:layout_marginTop="8dp"
+        android:text="Map View"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postListSearch" />
 
 </android.support.constraint.ConstraintLayout>

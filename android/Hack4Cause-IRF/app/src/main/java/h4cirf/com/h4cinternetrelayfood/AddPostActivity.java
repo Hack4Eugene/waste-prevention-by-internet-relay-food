@@ -10,8 +10,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Spinner;
 
+import com.google.gson.Gson;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
 import h4cirf.com.h4cinternetrelayfood.models.PostModel;
 import retrofit2.Call;
@@ -25,6 +31,8 @@ public class AddPostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_post);
 
+        doStuff();
+
         tokenID = getIntent().getStringExtra("token");
         View root = findViewById(R.id.addPostRoot);
         root.requestFocus();
@@ -37,6 +45,7 @@ public class AddPostActivity extends AppCompatActivity {
      */
     public void submitAction(View view)
     {
+        //*
         //Bring up our views (in list order)
         Spinner             foodTypeSpinner     = findViewById(R.id.reusableEditFoodType);
         TextInputEditText   quantityText        = findViewById(R.id.reusableEditQuantityText);
@@ -95,27 +104,32 @@ public class AddPostActivity extends AppCompatActivity {
         }
         post.status = statusSpinner.getSelectedItem().toString();
         post.description = commentText.getText().toString();
+        //*/
 
         //*****Launch on Success*****
-        if(succeeded)
+        if(true)
         {
-            post.creationDate = Calendar.getInstance().getTime();
-            post.eligibility = new ArrayList<>();
-            // Add the new post to the database and return to our main activity regardless of
-            // success
-            System.out.println("DEBUG: Token: " + tokenID);
-            MainActivity.api.doPostPost(tokenID, post).enqueue(new Callback<Void>() {
+            TimeZone tz = TimeZone.getTimeZone("UTC");
+            DateFormat df = new SimpleDateFormat("yyy-MM-dd'T'HH:mm'Z'");
+            df.setTimeZone(tz);
+            post.creationDate = df.format(new Date());
+            doStuff();
+            System.out.println(new Gson().toJson(post));
+            MainActivity.api.doPostPost(MainActivity.tokenID, post).enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
-                    returnToMain(true);
+                    System.out.println("Werked");
+                    System.out.println("Was succ? " + response.isSuccessful());
+                    //returnToMain(true);
                 }
 
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
-                    System.err.println(" DEBUG: Failed: is tokenID null: " + (tokenID == null));
-                    returnToMain(false);
+                    System.err.println(" DEBUG: Failed: is tokenID null: " + (MainActivity.tokenID == null));
+                    //returnToMain(false);
                 }
             });
+            //doStuff();
         }
     }
 
@@ -136,5 +150,39 @@ public class AddPostActivity extends AppCompatActivity {
     {
         setResult((success) ? RESULT_OK : RESULT_CANCELED);
         finish();
+    }
+
+    public void doStuff()
+    {
+        TimeZone tz = TimeZone.getTimeZone("UTC");
+        DateFormat df = new SimpleDateFormat("yyy-MM-dd'T'HH:mm'Z'");
+        df.setTimeZone(tz);
+        String date = df.format(new Date());
+        PostModel tempModel = new PostModel();
+        tempModel.creationDate = date;
+        tempModel.description = "Lots of carrots";
+        tempModel.pickupAddress = "1395 University St, Eugene, OR 97403";
+        tempModel.readiness = "packed";
+        tempModel.pickupWindow = "Now or never";
+        tempModel.title = "Huge carrots!";
+        tempModel.status = "available";
+        tempModel.email = MainActivity.userProfile.getEmail();
+
+
+        System.out.println(new Gson().toJson(tempModel));
+        MainActivity.api.doPostPost(MainActivity.tokenID, tempModel).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                System.out.println("Werked");
+                System.out.println("Was succ? " + response.isSuccessful());
+                //returnToMain(true);
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                System.err.println(" DEBUG: Failed: is tokenID null: " + (MainActivity.tokenID == null));
+                //returnToMain(false);
+            }
+        });
     }
 }
