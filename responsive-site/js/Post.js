@@ -15,7 +15,7 @@ function CreatePost(title, amount, description, pickupWindow, pickupAddress) {
             'user': '5ac8ae15982abe65368ca658'
         };
 
-        var authBearer = localStorage.getItem("authBearer");
+        var authBearer = localStorage.getItem("authBearer"); 
 
         // process the form
         $.ajax({
@@ -30,7 +30,9 @@ function CreatePost(title, amount, description, pickupWindow, pickupAddress) {
                 alert( "Data Saved: " + msg );
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
-                alert("some error");
+                console.log(XMLHttpRequest.response)
+                console.log(textStatus);
+                console.log(errorThrown);
             }});
 
 }
