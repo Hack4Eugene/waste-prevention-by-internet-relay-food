@@ -21,6 +21,15 @@ const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./api/swagger/swagger.yaml');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+// Always send CORS headers
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Authorization, Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
+  res.header("Cache-Control", "no-cache");
+  next();
+});
+
 var config = {
   appRoot: __dirname // required config
 };
