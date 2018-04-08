@@ -95,3 +95,8 @@ body,
 .food-stats {
   margin-top: 15vh;
 }
+
+.center-content {
+  text-align: center;
+  margin: 5vh 2.5vw;
+}

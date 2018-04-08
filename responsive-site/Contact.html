@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Material Design Bootstrap</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="vendor/dataTables/css/jquery.dataTables.min.css">
+</head>
+
+<body id="content-page">
+
+  <!-- Navbar -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+    <div class="container">
+
+      <!-- Brand -->
+      <a class="navbar-brand" href="/" target="_blank">
+        <strong>Food Rescue</strong>
+      </a>
+
+      <!-- Collapse -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        <!-- Left -->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="TheMarket.html">The Market</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="Contact.html">Contact
+              <span class="sr-only">(current)</span>
+            </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="AboutUs.html">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Help.html">Help</a>
+            </li>
+          </ul>
+
+          <!-- Right -->
+          <ul class="navbar-nav nav-flex-icons">
+
+            <li class="nav-item">
+              <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="nav-link border border-light rounded"
+                target="_blank">
+                Sign Up
+              </a>
+            </li>
+          </ul>
+
+      </div>
+
+    </div>
+  </nav>
+  <!-- Navbar -->
+
+  <!--Main layout-->
+  <!--Main layout-->
+  <main>
+    <div class="container">
+
+
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+              <div class="card">
+                <div class="card-header d-flex align-items-center">
+                  <h4>Contact Us</h4>
+                </div>
+                <div class="card-body">
+                  <p></p>
+                  <!-- id values are "subject", "body", "fullname", and "email" (and "submit") -->
+                  <form class="form-horizontal">
+                    <div class="form-group row">
+                      <label class="col-sm-3">Subject</label>
+                      <div class="col-sm-9">
+                        <input id="subject" type="text" placeholder="" class="form-control form-control-success"><small class="form-text"></small>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3">Body</label>
+                        <div class="col-sm-9">
+                          <textarea id="body" rows="10" class="form-control form-control-success" /></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3">Full Name</label>
+                        <div class="col-sm-9">
+                          <input id="fullname" type="text" placeholder="" class="form-control form-control-success"><small class="form-text"></small>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-sm-3">Email Address</label>
+                      <div class="col-sm-9">
+                        <input id="email" type="text" class="form-control form-control-warning"><small class="form-text"></small>
+                      </div>
+                    </div
+
+                    <div class="form-group row">
+                      <div class="col-sm-9 offset-sm-3">
+                        <a id="submit" class="btn btn-primary">Send</a>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+    </div>
+  </main>
+
+
+  </div>
+</nav>
+
+
+    </div>
+  </main>
+  <!--Main layout-->
+
+
+
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+      <!-- Initializations -->
+  <script type="text/javascript">
+    // Animations initialization
+    new WOW().init();
+  </script>
+  <script src="vendor/dataTables/js/jquery.dataTables.min.js"></script>
+  <!-- Main File-->
+  <script src="js/Post.js"></script>
+  <script src="js/User.js"></script>
+
+  <script type="text/JavaScript">
+    $(document).ready( function () {
+      var posts = GetAllPosts();
+      //AddUserToSession();
+
+    } );
+  </script>
+</body>
+
+</html>
