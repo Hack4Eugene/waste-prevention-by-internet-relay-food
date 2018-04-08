@@ -51,6 +51,9 @@
             <li class="nav-item">
               <a class="nav-link" href="TheMarket.html">The Market</a>
             </li>
+            <li class="nav-item" id="myposts-menu">
+              <a class="nav-link" href="MyPosts.html">My Posts</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="Contact.html">Contact</a>
             </li>
@@ -146,7 +149,9 @@
 
                   <div class="form-group row">
                     <div class="col-sm-12 text-center">
-                      <input type="submit" value="Claim" class="btn btn-primary">
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#contactDonorModal">
+                        Contact Donor
+                      </button>
                     </div>
                   </div>
                 </form>
@@ -192,6 +197,41 @@
     <!--/.Copyright-->
 
   </footer>
+
+  <div class="modal fade" id="contactDonorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Contact Donor</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label class="col-sm-3">Subject</label>
+          <div class="col-sm-12">
+            <input id="subject" type="text" class="form-control form-control-warning">
+          </div>
+          <label class="col-sm-3">Message</label>
+          <div class="col-sm-12">
+            <textarea id="contact-message" class="form-control form-control-warning" rows="4"></textarea>
+          </div>
+          <br/>
+            <div class="alert alert-success" role="alert" id="contact-success-message">
+              Message sent!
+            </div>
+            <div class="alert alert-danger" role="alert" id="contact-error-message">
+              Send failed!
+            </div>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn" data-dismiss="modal">Close</button>
+          <button type="button" id="send-message" class="btn btn-primary">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <!--/.Footer-->
 
     <!-- SCRIPTS -->
@@ -234,6 +274,8 @@
       var id = getUrlParameter("id");
       ViewPost(id);
       LoadUser();
+      $("#contact-success-message").hide();
+      $("#contact-error-message").hide();
     } );
   </script>
 </body>

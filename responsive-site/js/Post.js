@@ -55,12 +55,8 @@ function CreatePost(title, amount, description, pickupWindow, pickupAddress, rea
 
 }
 
-function UpdatePost(title, amount, description, pickupWindow, pickupAddress, available, readiness) {
+function UpdatePost(title, amount, description, pickupWindow, pickupAddress, available, readiness, eligibility) {
     var formData = {};
-        var eligibility = [];
-        $("input:checkbox[id^='eligibility-']:checked").each(function(){
-            eligibility.push($(this).val());
-        });
         
         formData['title'] = title;
         formData['status'] = 'available';
@@ -213,7 +209,42 @@ function ViewPost(postId) {
                         alert("some error");
                     }});
 
-                    }
+}
+
+function ContactDonor(subject, message) {
+    var formData = {};
+    
+    formData['subject'] = subject;
+    formData['message'] = message;
+    formData['creationDate'] = "" + new Date().toLocaleString();
+    formData['user'] = "5ac8ae15982abe65368ca658";
+
+    
+    var json = JSON.stringify(formData);
+    var authBearer = localStorage.getItem("authBearer");
+
+    // process the form
+    $.ajax({
+        type        : 'POST', 
+        url         : 'http://food.dlfsystems.com:10100/posts', 
+        data        : json, 
+        encode          : true,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization", authBearer);
+            xhr.setRequestHeader ("Content-Type", "application/json");
+        },
+        success: function(msg){
+            $("#createPost h4").html("Success");
+            $("#createPost form").html("Post created.");
+            $("#success-buttons").show();
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            console.log(XMLHttpRequest.response)
+            console.log(textStatus);
+            console.log(errorThrown);
+        }});
+
+}
 
                     function DeleteDonation(donationId) {
 

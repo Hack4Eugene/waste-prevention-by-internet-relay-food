@@ -48,6 +48,9 @@
           <li class="nav-item">
               <a class="nav-link" href="TheMarket.html">The Market</a>
             </li>
+            <li class="nav-item" id="myposts-menu">
+              <a class="nav-link" href="MyPosts.html">My Posts</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="Contact.html">Contact</a>
             </li>
@@ -163,7 +166,7 @@
 
 <script type="text/javascript">
     $(document).ready( function () {
-        $("#login-button").click(() => {
+        $("#login-button, #signup-button").click(() => {
           LoginUser();
           e.preventDefault();
         });
