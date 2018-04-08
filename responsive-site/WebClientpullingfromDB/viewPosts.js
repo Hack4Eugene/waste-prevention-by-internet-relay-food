@@ -2,11 +2,12 @@ var center = [ 44, 123 ];
 
 var highlightedPost = null;
 
-function toggleBounce() {
-  if (marker.getAnimation() !== null) {
-    marker.setAnimation(null);
+function toggleBounce(cope_) {
+
+  if (cope_.getAnimation() !== null) {
+    cope_.setAnimation(null);
   } else {
-    marker.setAnimation(google.maps.Animation.BOUNCE);
+    cope_.setAnimation(google.maps.Animation.BOUNCE);
   }
 }
 
@@ -26,15 +27,18 @@ function returnGeoLocation(params){
   get_.addEventListener('load',function(event){
 
     var results = JSON.parse(event.target.response);
+    console.log(results['results'][0]);
     params.geo = results['results'][0]['geometry']['location'];
 
+    console.log('the title snhould be: ', params.title)
 // update the global marker
     mapMarkers.push(new google.maps.Marker({
        position: params.geo,
        title: params.title,
        map: mapManifest
      }));
-     //mapMarkers[mapMarkers.length-1].addListener('click',toggleBounce);
+     console.log('this is the marker',mapMarkers[mapMarkers.length-1]);
+     mapMarkers[mapMarkers.length-1].addListener('click',toggleBounce);
 
   });
   get_.send();
@@ -166,7 +170,8 @@ function populateMostRecent(){
 }
 
 function addtoGlobMap (item,index){
-  var params = { address: item['pickupAddress'], geo: null, title: item['description']+'\t\n'+item['pickupAddress']};
+  var str=''+ item['description']+'\t\n'+item['pickupAddress'];
+  var params = { address: item['pickupAddress'], geo: null, title: str };
   returnGeoLocation(params);
 
 }
