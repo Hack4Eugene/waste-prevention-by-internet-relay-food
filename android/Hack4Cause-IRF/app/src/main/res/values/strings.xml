@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">Food Rescue</string>
+    <string name="com_auth0_client_id">naGKZTosG2Np77HXLWntXVcY1010eTFY</string>
+    <string name="com_auth0_domain">irf.auth0.com</string>
+    <string name="usrTextView">User Name</string>
+    <string name="passwordTextView">Password</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">The Market</string>
+    <string name="title_activity_add_post">AddPostActivity</string>
+    <string name="submit_post">Submit</string>
+    <string name="add_post">Add posting</string>
+    <string name="edit_post">Finish editing</string>
+    <string name="contact_poster">Contact poster</string>
+    <string name="start_edit_post">Edit post</string>
+    <string-array name="foodTypes_spinner_array">
+        <item>Select a food type</item>
+        <item>Grain</item>
+        <item>Vegetable</item>
+        <item>Fruit</item>
+        <item>Meal</item>
+        <item>Snack</item>
+        <item>Bulk Food</item>
+        <item>Canned Goods</item>
+        <item>Miscellaneous</item>
+    </string-array>
+    <string-array name="status_spinner_array">
+        <item>Available</item>
+        <item>Claimed</item>
+        <item>Picked up</item>
+    </string-array>
+    <string-array name="readiness_spinner_array">
+        <item>Select food readiness</item>
+        <item>Packed</item>
+        <item>Packable</item>
+        <item>Harvestable</item>
+    </string-array>
+    <string name="reusable_edit_quantity">Weight (lbs)</string>
+    <string name="reusable_edit_pickup_date">Pickup date and time</string>
+    <string name="reusable_edit_address">Address</string>
+    <string name="reusable_edit_contact_information">Contact information</string>
+    <string name="reusable_edit_expiry">Expiration date</string>
+    <string name="reusable_edit_description">Description</string>
+    <string name="reusable_edit_comment">Comments</string>
+    <string name="reusable_edit_food_type">Food type</string>
+    <string name="reusable_edit_status">Status</string>
+    <string name="reusable_edit_readiness">Readiness</string>
+    <string name="title_activity_post_map">Map</string>
+</resources>
