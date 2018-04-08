@@ -285,6 +285,22 @@ paths:
         in: path
         required: true
         type: string
+  '/users/posts':
+    x-swagger-router-controller: users
+    get:
+      tags:
+        - Users
+      summary: Get all posts for a user.
+      operationId: getPosts
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Success.
+          schema:
+            type: array
+            items:
+             $ref: '#/definitions/Post'
 definitions:
   Post:
     type: object
@@ -393,12 +409,12 @@ definitions:
   Notification:
     type : object
     properties:
-      userId:
+      email:
         type: string
-        description: User that has notification registered...
+        description: Email of user that has notification registered.
       searchQuery:
         type: string
-        description: Notify on Post updates that match this search. This should be unique in the database.
+        description: Notify on Post updates that match this search.
   User:
     type: object
     required:

@@ -60,11 +60,17 @@
 
           <!-- Right -->
           <ul class="navbar-nav nav-flex-icons">
-
-            <li class="nav-item">
-              <a href="index.html" class="nav-link border border-light rounded"
+            
+            <li class="nav-item" id="signup-menu">
+              <a href="" class="nav-link border border-light rounded"
                 target="_blank">
                 Sign Up
+              </a>
+            </li>
+            <li class="nav-item" id="login-menu">
+              <a href="" class="nav-link border border-light rounded"
+                target="_blank">
+                Login
               </a>
             </li>
           </ul>
@@ -170,8 +176,8 @@
   <script type="text/JavaScript">
     $(document).ready( function () {
       var posts = GetAllPosts();
-      //AddUserToSession();
-
+      AddUserToSession();
+      
     } );
   </script>
 </body>
