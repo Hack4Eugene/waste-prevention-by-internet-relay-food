@@ -295,8 +295,9 @@ definitions:
       creationDate:
         type: string
         description: When the post was created in ISO date format.
-      user:
-        $ref: '#/definitions/User'
+      email:
+        type: string
+        description:  The poster's email address.
       title:
         type: string
         description: The title for the post.
