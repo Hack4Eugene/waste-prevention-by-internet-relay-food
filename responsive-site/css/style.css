@@ -10,12 +10,24 @@ body,
 }
 
   #content-page nav {
-    background-color: black;
+    background-color: #7B7E30;
+  }
+
+  .green-button {
+    background-color: #818C30;
+  }
+
+  #signup-menu {
+    margin-right: 10px;
   }
 
     #content-page main {
       margin-top: 100px;
     }
+
+.btn-primary {
+  background-color: #88B4DB !important;
+}
 
 /* Half Page Carousel itself*/
 .carousel {
@@ -131,5 +143,5 @@ body,
 /* Adding color to the Navbar on mobile */
 @media only screen and (max-width: 768px) {
   .navbar {
-    background-color: #88B4DB; }
+    background-color: #7B7E30; }
   }
