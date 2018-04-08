@@ -19,7 +19,7 @@ module.exports = {
 // Endpoint implementations
 function getUserId(req){
   var header = req.header("authorization");
-  var token = req.header("authorization").split(" ")[1];
+  var token = header.split(" ")[1];
   var email = global.getEmailFromToken(token);
   var userId = global.getUserIdFromEmail(email);
   return userId;
