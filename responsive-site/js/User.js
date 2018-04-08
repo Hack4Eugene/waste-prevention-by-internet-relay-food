@@ -38,6 +38,10 @@ function AddUserToSession() {
     var url_string = window.location.href.replace("#", "?");
     var url = new URL(url_string);
     var auth = url.searchParams.get("id_token");
+    // Overwrite correct value with null sometimes, this prevents that
+    if auth == null || auth == undefined || auth == "" {
+      return
+    }
     auth = "bearer " + auth;
 
     var r = new XMLHttpRequest();
