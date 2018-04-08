@@ -45,11 +45,3 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
 
 });
 
-global.getUserIdFromEmail = function (email) {
-  var user = User.findOne({email : email});
-  if (user) {
-    return user.userId;
-  } else {
-    return null;
-  }
-};

@@ -43,7 +43,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="index.html">Home</a>
               </li>
-            <li class="nav-item">
+            <li class="nav-item active">
               <a class="nav-link" href="TheMarket.html">The Market</a>
             </li>
             <li class="nav-item">
@@ -88,12 +88,11 @@
 
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
-              <div class="card">
+              <div class="card" id="createPost">
                 <div class="card-header d-flex align-items-center">
                   <h4>New Post</h4>
                 </div>
                 <div class="card-body">
-                  <p></p>
                   <form class="form-horizontal">
                     <div class="form-group row">
                       <label class="col-sm-3">Title</label>
@@ -151,7 +150,7 @@
                     <div class="form-group row">
                       <label class="col-sm-3">Photo</label>
                       <div class="col-sm-9">
-                        <input id="photo" type="file" accept="image/*" class="form-control form-control-warning"><small class="form-text"></small>
+                        <input id="photo" type="file" accept="image/*" class="form-control form-control-warning" /><small class="form-text"></small>
                       </div>
                     </div>
 
@@ -161,6 +160,12 @@
                       </div>
                     </div>
                   </form>
+
+                  <div class="form-group row" style="display: none;" id="success-buttons">
+                    <div class="col-sm-9 offset-sm-3">
+                      <a id="viewPost" href="TheMarket.html" class="btn btn-primary">View</a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -192,6 +197,7 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="js/mdb.min.js"></script>
+    <script type="text/javascript" src="js/asmcrypto.js"></script>
       <!-- Initializations -->
   <script type="text/javascript">
     // Animations initialization
