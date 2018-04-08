@@ -31,7 +31,7 @@ public class AddPostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_post);
 
-        doStuff();
+        //doStuff();
 
         tokenID = getIntent().getStringExtra("token");
         View root = findViewById(R.id.addPostRoot);
@@ -113,7 +113,7 @@ public class AddPostActivity extends AppCompatActivity {
             DateFormat df = new SimpleDateFormat("yyy-MM-dd'T'HH:mm'Z'");
             df.setTimeZone(tz);
             post.creationDate = df.format(new Date());
-            doStuff();
+            //doStuff();
             System.out.println(new Gson().toJson(post));
             MainActivity.api.doPostPost(MainActivity.tokenID, post).enqueue(new Callback<Void>() {
                 @Override

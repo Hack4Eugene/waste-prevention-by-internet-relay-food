@@ -133,7 +133,7 @@ public class PostListFragment extends Fragment {
         //for(int i = 0; i < 20; ++i)
         //    posts.add(tempModel);
         //*/
-        //*
+        /*
 
         System.out.println(new Gson().toJson(tempModel));
         MainActivity.api.doPostPost(MainActivity.tokenID, tempModel).enqueue(new Callback<Void>() {
