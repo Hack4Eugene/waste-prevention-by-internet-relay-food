@@ -8,10 +8,14 @@ function LoadUser(){
         $("#logout-menu").hide();
         $("#login-menu").show();
         $("#signup-menu").show();
+        $("#myposts-menu").hide();
     } else {
         $("#logout-menu").show();
         $("#login-menu").hide();
         $("#signup-menu").hide();
+        $("#myposts-menu").show();
+        $("#signup-button").hide();
+        $("#login-button").hide();
     }
 }
 

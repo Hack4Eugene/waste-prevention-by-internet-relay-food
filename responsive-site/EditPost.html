@@ -23,7 +23,7 @@
     <div class="container">
 
       <!-- Brand -->
-      <a class="navbar-brand" href="/" target="_blank">
+      <a class="navbar-brand" href="index.html">
         <strong>Food Rescue</strong>
       </a>
 
@@ -108,16 +108,21 @@
                     <div class="form-group row">
                         <label class="col-sm-3">Readiness</label>
                         <div class="col-sm-9">
-                          <input id="readiness" type="text" placeholder="" class="form-control form-control-success"><small class="form-text"></small>
+                          <select id="readiness" class="form-control">
+                            <option value="harvestable">Harvestable</option>
+                            <option value="packable">Packable</option>
+                            <option value="packed">Packed</option>
+                          </select>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-3">Eligibility</label>
                         <div class="col-sm-9">
-                            <select name="eligibility" class="form-control">
-                                <option>Business</option>
-                                <option>Individual</option>
-                              </select>
+                          <fieldset id="eligibility-group">
+                            <input type="checkbox" id="eligibility-business" value="business"> Business<br/>
+                            <input type="checkbox" id="eligibility-non-profit" value="non-profit"> Non-Profit<br/>
+                            <input type="checkbox" id="eligibility-individual" value="individual"> Individual<br/>
+                          </fieldset>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -131,12 +136,6 @@
                       </div>
                   </div>
                     <div class="form-group row">
-                      <label class="col-sm-3">Weight</label>
-                      <div class="col-sm-9">
-                        <input id="weight" type="number" style="width:150px" class="form-control form-control-warning"><small class="form-text">Weight in pounds.</small>
-                      </div>
-                    </div>
-                    <div class="form-group row">
                         <label class="col-sm-3">Pickup Window</label>
                         <div class="col-sm-9">
                           <input id="pickupWindow" type="text" placeholder="" class="form-control form-control-success"><small class="form-text"></small>
@@ -147,13 +146,6 @@
                       <label class="col-sm-3">Pickup Address</label>
                       <div class="col-sm-9">
                         <input id="pickupAddress" type="text" class="form-control form-control-warning"><small class="form-text"></small>
-                      </div>
-                    </div>
-
-                    <div class="form-group row">
-                      <label class="col-sm-3">Photo</label>
-                      <div class="col-sm-9">
-                        <input id="photo" type="file" accept="image/*" class="form-control form-control-warning" /><small class="form-text"></small>
                       </div>
                     </div>
 
@@ -205,6 +197,10 @@
 
   <script type="text/JavaScript">
     $(document).ready( function () {
+
+      var id = getUrlParameter("id");
+      ViewPost(id);
+
       $("#submit").click(() => {
         var title = $("#title").val();
         var amount = $("#amount").val();

@@ -25,7 +25,7 @@
     <div class="container">
 
       <!-- Brand -->
-      <a class="navbar-brand" href="/" target="_blank">
+      <a class="navbar-brand" href="/">
         <strong>Food Rescue</strong>
       </a>
 
@@ -178,7 +178,12 @@
 
   <script type="text/JavaScript">
     $(document).ready( function () {
-      LoadUser();
+      $("#login-button, #signup-button").click(() => {
+          LoginUser();
+          e.preventDefault();
+        });
+
+        LoadUser();
 
     } );
   </script>

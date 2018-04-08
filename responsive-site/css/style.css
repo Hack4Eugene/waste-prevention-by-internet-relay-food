@@ -10,12 +10,24 @@ body,
 }
 
   #content-page nav {
-    background-color: black;
+    background-color: #7B7E30;
+  }
+
+  .green-button {
+    background-color: #818C30;
+  }
+
+  #signup-menu {
+    margin-right: 10px;
   }
 
     #content-page main {
       margin-top: 100px;
     }
+
+.btn-primary {
+  background-color: #88B4DB !important;
+}
 
 /* Half Page Carousel itself*/
 .carousel {
@@ -79,11 +91,14 @@ body,
   padding: 0 50px;
 }
 
-
+#createNewDonation {
+  margin-top: 15px;
+}
 
     @media (min-width: 641px) {
         #createNewDonation {
-            margin-left: 20px;
+            margin-right: 20px;
+            float: right;
         }
     }
 
@@ -102,12 +117,16 @@ body,
         }
 
         .food-stats h1, .food-stats .big-number {
-          font-size: 30px !important;
+          font-size: 20px !important;
         }
 
         #carousel-content {
           height: 100%;
           margin-top: 200px;
+        }
+
+        #carousel-content h1 {
+          font-size: 24px !important;
         }
 
     }
@@ -127,5 +146,5 @@ body,
 /* Adding color to the Navbar on mobile */
 @media only screen and (max-width: 768px) {
   .navbar {
-    background-color: #929FBA; }
+    background-color: #7B7E30; }
   }
