@@ -2,7 +2,7 @@ var mapManifest = null;
 var mapMarkers = [];
 var highlightedPost = null
 
-  function initMap() {
+function initMap() {
     var uluru = {lat: 44, lng: 123}; // the center for eugene
     var dac = new XMLHttpRequest();
     var getURL= 'https://maps.googleapis.com/maps/api/geocode/json?address='
@@ -25,6 +25,4 @@ var highlightedPost = null
     });
     dac.send();
 
-    var params ={ address: 'Eugene, OR', geo: null}
-    returnGeoLocation(params);
-    console.log("the params are now", params);
+  }

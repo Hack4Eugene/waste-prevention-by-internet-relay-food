@@ -16,14 +16,14 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 
-<body>
+<body id="content-page">
 
   <!-- Navbar -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
     <div class="container">
 
       <!-- Brand -->
-      <a class="navbar-brand" href="https://mdbootstrap.com/material-design-for-bootstrap/" target="_blank">
+      <a class="navbar-brand" href="index.html" target="_blank">
         <strong>Food Rescue</strong>
       </a>
 
@@ -38,10 +38,8 @@
 
         <!-- Left -->
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home
-              <span class="sr-only">(current)</span>
-            </a>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
           </li>
           <li class="nav-item">
               <a class="nav-link" href="TheMarket.html">The Market</a>
@@ -52,8 +50,10 @@
             <li class="nav-item">
               <a class="nav-link" href="AboutUs.html">About Us</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="Help.html">Help</a>
+            <li class="nav-item active">
+              <a class="nav-link" href="Help.html">Help
+                <span class="sr-only">(current)</span>
+              </a>
             </li>
         </ul>
 
@@ -69,15 +69,14 @@
         </ul>
 
       </div>
+    </nav>
+    <!-- Navbar -->
 
-    </div>
-  </nav>
-  <!-- ////////// Navbar ////////////-->
   <div class="container">
 
 
       <div class="row" >
-          <div class="col-lg-9 col-lg-offset-3 col-xs-12">
+          <div class="col-lg-12 col-lg-offset-3 col-xs-12">
             <div class="card" style="display:block; top: 150px;">
               <div class="card-header d-flex align-items-center">
                 <h4> Help - Frequently Asked Questions</h4>
@@ -86,17 +85,22 @@
                 <p></p>
                 <form class="form-horizontal">
                   <div class="form-group row">
-                    <label class="col-sm-3"> Im not sure if i can use this app...</label>
-                    <div class="col-sm-9">
-                      <p>Lorizzle ipsizzle dolor break yo neck, yall izzle, fizzle adipiscing elit.
-                         Nullizzle shizzlin dizzle velizzle, fo shizzle volutpizzle, yo ass, you son
-                         of a bizzle vizzle, break it down.
+                    <label class="col-sm-4"> Im not sure if i can use this app...</label>
+                    <div class="col-sm-8">
+                      <p>Skate ipsum dolor sit amet, pivot Greg Evans Kevin Harris rail vert
+                         rails. Shoveit transfer skate or die bearings locals. Rail slide hanger
+                          Madonna body varial tailslide ledge. Cab flip slob air yeah
+                          kickflip Ed Templeton locals. Mini ramp Bare Cover kickflip bone
+                          air ledge 1080. Hang up stalefish invert hand rail Operation Ivy
+                          salad grind. Hang ten launch ramp ledge ollie north nosegrind.
+                          Kick-nose regular footed soul skate pressure flip 900. Nose grab
+                           boned out 720 crailtap finger flip.
                       </p>
                     </div>
                   </div>
                   <div class="form-group row">
-                      <label class="col-sm-3"> I dont have time to schedule pick up appointments, how can I have time for this app?</label>
-                      <div class="col-sm-9">
+                      <label class="col-sm-4"> I dont have time to schedule pick up appointments, how can I have time for this app?</label>
+                      <div class="col-sm-8">
                         <p>Lorizzle ipsizzle dolor break yo neck, yall izzle, fizzle adipiscing elit.
                            Nullizzle shizzlin dizzle velizzle, fo shizzle volutpizzle, yo ass, you son
                            of a bizzle vizzle, break it down.
@@ -104,8 +108,8 @@
                         </div>
                   </div>
                   <div class="form-group row">
-                      <label class="col-sm-3">What kinds of foods are good to donate?</label>
-                      <div class="col-sm-9">
+                      <label class="col-sm-4">What kinds of foods are good to donate?</label>
+                      <div class="col-sm-8">
                         <p>
                           Downhill finger flip crail grab nosegrind rail. Coping casper steps goofy
                           footed crail grab. Regular footed snake mini ramp disaster g-turn.
@@ -118,8 +122,8 @@
                       </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-sm-3"> What is the meaning of life? </label>
-                    <div class="col-sm-9">
+                    <label class="col-sm-4"> What is the meaning of life? </label>
+                    <div class="col-sm-8">
                       <p>Buffalo flank frankfurter jowl, meatloaf ribeye swine drumstick capicola doner
                          venison prosciutto picanha. Tail buffalo tri-tip chuck jerky chicken porchetta
                          andouille pork chop ham hock t-bone. Landjaeger hamburger kielbasa t-bone prosciutto. Jerky cupim chuck spare ribs kielbasa. Frankfurter sirloin kevin sausage filet mignon ham.
@@ -128,21 +132,12 @@
                   </div>
 
                   <div class="form-group row">
-                    <label class="col-sm-3">What happens if I am unable to give away all my donations</label>
-                    <div class="col-sm-9">
+                    <label class="col-sm-4">What happens if I am unable to give away all my donations</label>
+                    <div class="col-sm-8">
                       <p>Lorizzle ipsizzle dolor break yo neck, yall izzle, fizzle adipiscing elit.
                          Nullizzle shizzlin dizzle velizzle, fo shizzle volutpizzle, yo ass, you son
                          of a bizzle vizzle, break it down.
                       </p>
-                    </div>
-                  </div>
-
-
-
-                  <div class="form-group row">
-                    <label class="col-sm-3">Weight</label>
-                    <div class="col-sm-9">
-                      <input id="weight" type="number" style="width:150px" class="form-control form-control-warning"><small class="form-text">Weight in pounds.</small>
                     </div>
                   </div>
 

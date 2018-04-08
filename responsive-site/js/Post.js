@@ -47,7 +47,7 @@ function CreatePost(title, amount, description, pickupWindow, pickupAddress) {
             }});
 
 }
-
+var allposts;
 function GetAllPosts() {
 
     $.ajax({
@@ -55,6 +55,8 @@ function GetAllPosts() {
         url         : 'http://food.dlfsystems.com:10100/posts', // the url where we want to POST
         dataType    : 'json', // what type of data do we expect back from the server
         success: function(response){
+            allposts = response;
+            allposts.forEach(addtoGlobMap);
             $('#donationsTable').DataTable({
                 data: response,
                 "columns": [
@@ -86,10 +88,10 @@ function GetAllPosts() {
             sURLVariables = sPageURL.split('&'),
             sParameterName,
             i;
-    
+
         for (i = 0; i < sURLVariables.length; i++) {
             sParameterName = sURLVariables[i].split('=');
-    
+
             if (sParameterName[0] === sParam) {
                 return sParameterName[1] === undefined ? true : sParameterName[1];
             }
@@ -135,7 +137,3 @@ function ViewPost(postId) {
                             });
 
                           }
-
-                          
-
-                            
