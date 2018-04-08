@@ -40,7 +40,7 @@ function AddUserToSession() {
     var auth = url.searchParams.get("id_token");
     auth = "bearer " + auth;
 
-    var req = open("POST", "http://http://food.dlfsystems.com/users", true);
+    var req = open("POST", "http://food.dlfsystems.com/users", true);
     req.setRequestHeader("Content-Type", "application/json");
     req.setRequestHeader('Authorization', auth);
     req.send("");
