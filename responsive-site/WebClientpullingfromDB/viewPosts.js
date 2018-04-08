@@ -18,7 +18,7 @@ function returnGeoLocation(params){
   var get_ = new XMLHttpRequest();
   var getURL= 'https://maps.googleapis.com/maps/api/geocode/json?address='
 
-  if (params == undefined) {
+  if (params == undefined || params.address == undefined) {
     return
   }
 
