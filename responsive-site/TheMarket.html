@@ -182,6 +182,11 @@
 
   <script type="text/JavaScript">
     $(document).ready( function () {
+      $("#login-button, #signup-button").click(() => {
+          LoginUser();
+          e.preventDefault();
+        });
+
       var posts = GetAllPosts();
       AddUserToSession();
       LoadUser();
