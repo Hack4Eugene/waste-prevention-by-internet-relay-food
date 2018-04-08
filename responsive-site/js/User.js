@@ -1,3 +1,20 @@
+$("#logout-user").click(() => {
+    LogoutUser();
+  });
+
+function LoadUser(){
+    var user = localStorage.getItem("authBearer");
+    if(user == "null") {
+        $("#logout-menu").hide();
+        $("#login-menu").show();
+        $("#signup-menu").show();
+    } else {
+        $("#logout-menu").show();
+        $("#login-menu").hide();
+        $("#signup-menu").hide();
+    }
+}
+
 function LogoutUser() {
     localStorage.setItem("authBearer", null);
 }
@@ -15,9 +32,6 @@ function LoginUser() {
       webAuth.authorize();
 }
 
-function LoadUserFromSession() {
-    var user = localStorage.getItem("currentUser");
-}
 
 function AddUserToSession() {
 

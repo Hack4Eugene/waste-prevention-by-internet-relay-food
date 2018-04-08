@@ -80,7 +80,7 @@
             <div class="col-lg-8 col-lg-offset-2">
               <div class="card" id="createPost">
                 <div class="card-header d-flex align-items-center">
-                  <h4>New Post</h4>
+                  <h4>Edit Post</h4>
                 </div>
                 <div class="card-body">
                   <form class="form-horizontal">
@@ -105,21 +105,16 @@
                     <div class="form-group row">
                         <label class="col-sm-3">Readiness</label>
                         <div class="col-sm-9">
-                          <select id="readiness" class="form-control">
-                            <option value="harvestable">Harvestable</option>
-                            <option value="packable">Packable</option>
-                            <option value="packed">Packed</option>
-                          </select>
+                          <input id="readiness" type="text" placeholder="" class="form-control form-control-success"><small class="form-text"></small>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-3">Eligibility</label>
                         <div class="col-sm-9">
-                          <fieldset id="eligibility-group">
-                            <input type="checkbox" id="eligibility-business" value="business"> Business<br/>
-                            <input type="checkbox" id="eligibility-non-profit" value="non-profit"> Non-Profit<br/>
-                            <input type="checkbox" id="eligibility-individual" value="individual"> Individual<br/>
-                          </fieldset>
+                            <select name="eligibility" class="form-control">
+                                <option>Business</option>
+                                <option>Individual</option>
+                              </select>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -211,8 +206,7 @@
         var desc = $("#description").val();
         var window = $("#pickupWindow").val();
         var location = $("#pickupAddress").val();
-        var readiness = $("#readiness option:selected").val();
-        CreatePost(title, amount, desc, window, location, readiness);
+        UpdatePost(title, amount, desc, window, location);
       });
       LoadUser();
     });

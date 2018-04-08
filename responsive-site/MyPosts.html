@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>IRF - Contact</title>
+    <title>Material Design Bootstrap</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
@@ -14,7 +14,7 @@
     <link href="css/mdb.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
     <link href="css/style.css" rel="stylesheet">
-
+    <script src="WebClientpullingfromDB/viewPosts.js"></script>
     <link rel="stylesheet" href="vendor/dataTables/css/jquery.dataTables.min.css">
 </head>
 
@@ -42,26 +42,25 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a class="nav-link" href="index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="TheMarket.html">The Market</a>
-            </li>
+              </li>
             <li class="nav-item active">
-              <a class="nav-link" href="Contact.html">Contact
-              <span class="sr-only">(current)</span>
-            </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="AboutUs.html">About Us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="Help.html">Help</a>
-            </li>
+                <a class="nav-link" href="TheMarket.html">The Market</a>
+                <span class="sr-only">(current)</span>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="Contact.html">Contact</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="AboutUs.html">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="Help.html">Help</a>
+              </li>
           </ul>
 
           <!-- Right -->
           <ul class="navbar-nav nav-flex-icons">
-
+            
             <li class="nav-item" id="signup-menu">
               <a href="" class="nav-link border border-light rounded">
                 Sign Up
@@ -88,73 +87,78 @@
   <!-- Navbar -->
 
   <!--Main layout-->
-  <!--Main layout-->
   <main>
     <div class="container">
 
+      <!--Section: Main info-->
+      <section>
 
-        <div class="row">
-            <div class="col-lg-8 offset-lg-2">
-              <div class="card">
-                <div class="card-header d-flex align-items-center">
-                  <h4>Contact Us</h4>
-                </div>
-                <div class="card-body">
-                  <p></p>
-                  <!-- id values are "subject", "body", "fullname", and "email" (and "submit") -->
-                  <form class="form-horizontal">
-                    <div class="form-group row">
-                      <label class="col-sm-3">Subject</label>
-                      <div class="col-sm-9">
-                        <input id="subject" type="text" placeholder="" class="form-control form-control-success"><small class="form-text"></small>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3">Body</label>
-                        <div class="col-sm-9">
-                          <textarea id="body" rows="10" class="form-control form-control-success" /></textarea>
-                        </div>
-                    </div>
+       <div class="row">
+      <div class="col-lg-12 padding-bottom">
+          <div class="card">
+            <div class="card-header">
+              <h4>My Posts</h4>
+            </div>
+            <div class="col-xs-12">
+              <a href="CreatePost.html" class="btn btn-primary" id="createNewDonation" >Create New</a>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table id="donationsTable" class="table table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th class="hide-mobile">Readiness</th>
+                      <th class="hide-mobile">Address</th>
+                      <th class="hide-mobile">Posted</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="tableRows">
 
-                    <div class="form-group row">
-                        <label class="col-sm-3">Full Name</label>
-                        <div class="col-sm-9">
-                          <input id="fullname" type="text" placeholder="" class="form-control form-control-success"><small class="form-text"></small>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-sm-3">Email Address</label>
-                      <div class="col-sm-9">
-                        <input id="email" type="text" class="form-control form-control-warning"><small class="form-text"></small>
-                      </div>
-                    </div
-
-                    <div class="form-group row">
-                      <div class="col-sm-9 offset-sm-3">
-                        <a id="submit" class="btn btn-primary">Send</a>
-                      </div>
-                    </div>
-                  </form>
-                </div>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
-
-    </div>
-  </main>
-
-
-  </div>
-</nav>
+        </div>
+        <div class="col-lg-12">
+            <div class="card">
+              <div class="card-header d-flex align-items-center">
+                <h4>Pickup Locations</h4>
+              </div>
+              <div class="card-body" id="map" style="display:block; height: 500px;">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--Section: Main info-->
 
 
     </div>
   </main>
   <!--Main layout-->
 
+  <!--Footer-->
+  <footer class="page-footer text-center font-small mt-4 wow fadeIn">
 
+    <!--Copyright-->
+    <div class="footer-copyright py-3">
+      © 2018 Copyright:
+      <a href="https://mdbootstrap.com/bootstrap-tutorial/" target="_blank"> MDBootstrap.com </a>
+    </div>
+    <!--/.Copyright-->
+
+  </footer>
+  <!--/.Footer-->
 
     <!-- SCRIPTS -->
+    <script async defer src="WebClientpullingfromDB/google.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuUJl43vI8auaFBkq5WDQC5rF-FV71hK4&callback=initMap">
+    </script>
+
+
     <!-- JQuery -->
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap tooltips -->
@@ -175,8 +179,9 @@
 
   <script type="text/JavaScript">
     $(document).ready( function () {
+      var posts = GetMyPosts();
+      AddUserToSession();
       LoadUser();
-
     } );
   </script>
 </body>

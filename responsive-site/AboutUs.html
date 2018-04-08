@@ -60,10 +60,21 @@
         <!-- Right -->
         <ul class="navbar-nav nav-flex-icons">
 
-          <li class="nav-item">
-            <a href="SignUp.html" class="nav-link border border-light rounded"
-              target="_blank">
+          <li class="nav-item" id="signup-menu">
+            <a href="" class="nav-link border border-light rounded">
               Sign Up
+            </a>
+          </li>
+          &nbsp;
+          <li class="nav-item" id="login-menu">
+            <a href="" class="nav-link border border-light rounded">
+              Login
+            </a>
+          </li>
+          &nbsp;
+          <li class="nav-item" id="logout-menu">
+            <a class="nav-link border border-light rounded" id="logout-user" href="index.html">
+              Logout
             </a>
           </li>
         </ul>
@@ -107,11 +118,19 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="js/mdb.min.js"></script>
+    <script type="text/javascript" src="js/User.js"></script>
       <!-- Initializations -->
   <script type="text/javascript">
     // Animations initialization
     new WOW().init();
   </script>
+
+<script type="text/JavaScript">
+  $(document).ready( function () {
+    LoadUser();
+
+  } );
+</script>
 </body>
 
 </html>

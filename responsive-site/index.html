@@ -60,11 +60,25 @@
         <!-- Right -->
         <ul class="navbar-nav nav-flex-icons">
 
-          <li class="nav-item">
-            <a class="nav-link border border-light rounded signup-button">
+          <li class="nav-item" id="signup-menu">
+            <a href="" class="nav-link border border-light rounded"
+              target="_blank">
               Sign Up
             </a>
           </li>
+          &nbsp;
+          <li class="nav-item" id="login-menu">
+            <a href="" class="nav-link border border-light rounded"
+              target="_blank">
+              Login
+            </a>
+          </li>
+          &nbsp;
+            <li class="nav-item" id="logout-menu">
+              <a class="nav-link border border-light rounded" id="logout-user" href="index.html">
+                Logout
+              </a>
+            </li>
         </ul>
 
       </div>
@@ -151,6 +165,8 @@
           LoginUser();
           e.preventDefault();
         });
+
+        LoadUser();
     } );
 </script>
 
