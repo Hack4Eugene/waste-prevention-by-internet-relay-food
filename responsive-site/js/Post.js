@@ -104,12 +104,13 @@ function GetAllPosts() {
             allposts = response;
             allposts.forEach(addtoGlobMap);
             $('#donationsTable').DataTable({
+                "bPaginate": false,
                 data: response,
                 "columns": [
                     { "data": "title" },
-                    { "data": "readiness" },
-                    { "data": "pickupAddress" },
-                    { "data": "creationDate",
+                    { "data": "readiness", className: "hide-mobile" },
+                    { "data": "pickupAddress", className: "hide-mobile" },
+                    { "data": "creationDate", className: "hide-mobile",
                     "render": function (data) {
                         var date = new Date(data);
                         var month = date.getMonth() + 1;
@@ -144,17 +145,18 @@ function GetAllPosts() {
                 allposts = response;
                 allposts.forEach(addtoGlobMap);
                 $('#donationsTable').DataTable({
+                    "bPaginate": false,
                     data: response,
                     "columns": [
                         { "data": "title" },
-                        { "data": "readiness" },
-                        { "data": "pickupAddress" },
+                        { "data": "readiness", className: "hide-mobile" },
+                        { "data": "pickupAddress", className: "hide-mobile" },
                         { "data": "creationDate",
                         "render": function (data) {
                             var date = new Date(data);
                             var month = date.getMonth() + 1;
                             return (month.length > 1 ? month : "0" + month) + "/" + date.getDate() + "/" + date.getFullYear();
-                        } },
+                        }, className: "hide-mobile" },
                         { "data": "_id",
                         "render": function (id){
                             return "<a href='ViewPost.html?id=" + id + "'>View</a>";
@@ -199,7 +201,9 @@ function ViewPost(postId) {
                         $("#postTitle").text(response.title);
                         $("#title").text(response.title);
                         $("#status").text(response.status);
+                        $("#amount").text(response.amount);
                         $("#readiness").text(response.readiness);
+                        $("#eligibility").text(response.eligibility);
                         $("#description").text(response.description);
                         $("#pickupWindow").text(response.pickupWindow);
                         $("#pickupAddress").text(response.pickupAddress);
@@ -216,9 +220,6 @@ function ContactDonor(subject, message) {
     
     formData['subject'] = subject;
     formData['message'] = message;
-    formData['creationDate'] = "" + new Date().toLocaleString();
-    formData['user'] = "5ac8ae15982abe65368ca658";
-
     
     var json = JSON.stringify(formData);
     var authBearer = localStorage.getItem("authBearer");

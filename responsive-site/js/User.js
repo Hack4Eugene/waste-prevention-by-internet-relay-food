@@ -2,8 +2,6 @@ $("#logout-user").click(() => {
     LogoutUser();
   });
 
-localStorage.getItem("authBearer") = "nothing"
-
 function LoadUser(){
     var user = localStorage.getItem("authBearer");
     if(user == "null") {

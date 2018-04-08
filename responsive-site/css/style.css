@@ -53,41 +53,6 @@ body,
 }
 
 
-    @media (min-width: 641px) {
-        #createNewDonation {
-            margin-left: 20px;
-        }
-    }
-
-    @media (max-width: 640px) {
-        .hide-mobile {
-            display: none;
-        }
-
-        #availableDonations {
-            padding: 0px !important;
-        }
-
-    }
-
-/* Adjustment for mobile devices*/
-@media (max-width: 776px) {
-  .carousel {
-    height: 100%; } }
-
-/* Navbar animation */
-.navbar {
-  background-color: rgba(0, 0, 0, 0.2); }
-
-.top-nav-collapse {
-  background-color: #929FBA; }
-
-/* Adding color to the Navbar on mobile */
-@media only screen and (max-width: 768px) {
-  .navbar {
-    background-color: #929FBA; }
-  }
-
 /* Footer color for sake of consistency with Navbar */
 .page-footer {
   background-color: #929FBA; }
@@ -113,3 +78,54 @@ body,
 
   padding: 0 50px;
 }
+
+
+
+    @media (min-width: 641px) {
+        #createNewDonation {
+            margin-left: 20px;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .hide-mobile {
+            display: none;
+        }
+
+        #availableDonations {
+            padding: 0px !important;
+        }
+
+        .food-stats {
+          margin-top: 5vh;
+          height: 250px;
+        }
+
+        .food-stats h1, .food-stats .big-number {
+          font-size: 30px !important;
+        }
+
+        #carousel-content {
+          height: 100%;
+          margin-top: 200px;
+        }
+
+    }
+
+/* Adjustment for mobile devices*/
+@media (max-width: 776px) {
+  .carousel {
+    height: 100%; } }
+
+/* Navbar animation */
+.navbar {
+  background-color: rgba(0, 0, 0, 0.2); }
+
+.top-nav-collapse {
+  background-color: #929FBA; }
+
+/* Adding color to the Navbar on mobile */
+@media only screen and (max-width: 768px) {
+  .navbar {
+    background-color: #929FBA; }
+  }
