@@ -116,23 +116,22 @@ function getPost(req, res) {
 function addPost(req, res) {
     var authHeader = req.header("Authorization");
 
-    var email = getEmailFromToken(authHeader, res, authHeader)
-    if (email == "error") {
-      return
-    }
+    var email = getEmailFromToken(authHeader, req, res, authHeader, addPostVerifid)
+}
 
-    console.log(email)
+global.addPostVerifid = function(req, res, email) {
+  if (email == "error") {
+    return
+  }
 
-      const post = Post(req.body);
-      post.save(function (error) {
-        if (error) {
-          res.status(500).send('Error saving new post: ' + util.inspect(error));
-        } else {
-          res.status(200).end(); // No body will be sent
-        }
-      });
-    //});
-
+    const post = Post(req.body);
+    post.save(function (error) {
+      if (error) {
+        res.status(500).send('Error saving new post: ' + util.inspect(error));
+      } else {
+        res.status(200).end(); // No body will be sent
+      }
+    });
 }
 
 function updatePost(req, res) {
