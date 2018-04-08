@@ -1,33 +1,46 @@
+/*function onFilePick(e){
+    var file = e.currentTarget.files[0];
+
+    var reader = new FileReader();
+    reader.onload = (event) => {
+      var contents = event.target.result;
+      var digest = asmCrypto.SHA256.hex(contents);
+    };
+
+    reader.readAsArrayBuffer(file);
+}*/
+
 
 function CreatePost(title, amount, description, pickupWindow, pickupAddress) {
-// get the form data
-        // there are many ways to get this data using jQuery (you can use the class or id also)
-        var formData = {
-            'title': title,
-            'status': 'available',
-            'eligibility': [ "business" ],
-            'amount': amount,
-            'readiness': "harvestable",
-            'description': description,
-            'pickupWindow': pickupWindow,
-            'pickupAddress': pickupAddress,
-            'creationDate': Date.now(),
-            'user': '5ac8ae15982abe65368ca658'
-        };
+        var formData = {};
+        formData['title'] = title;
+        formData['status'] = 'available';
+        formData['eligibility'] = [ "business" ];
+        formData['readiness'] = "harvestable";
+        formData['description'] = description;
+        formData['pickupWindow'] = pickupWindow;
+        formData['pickupAddress'] = pickupAddress;
+        formData['creationDate'] = "" + new Date().toLocaleString();
+        formData['user'] = "5ac8ae15982abe65368ca658";
 
+        
+        var json = JSON.stringify(formData);
         var authBearer = localStorage.getItem("authBearer");
 
         // process the form
         $.ajax({
             type        : 'POST', 
             url         : 'http://food.dlfsystems.com:10100/posts', 
-            data        : formData, 
-            contentType: "application/json; charset=utf-8",
+            data        : json, 
+            encode          : true,
             beforeSend: function (xhr) {
                 xhr.setRequestHeader ("Authorization", authBearer);
+                xhr.setRequestHeader ("Content-Type", "application/json");
             },
             success: function(msg){
-                alert( "Data Saved: " + msg );
+                $("#createPost h4").html("Success");
+                $("#createPost form").html("Post created.");
+                $("#success-buttons").show();
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 alert("some error");
