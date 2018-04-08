@@ -55,12 +55,8 @@ function CreatePost(title, amount, description, pickupWindow, pickupAddress, rea
 
 }
 
-function UpdatePost(title, amount, description, pickupWindow, pickupAddress, available, readiness) {
+function UpdatePost(title, amount, description, pickupWindow, pickupAddress, available, readiness, eligibility) {
     var formData = {};
-        var eligibility = [];
-        $("input:checkbox[id^='eligibility-']:checked").each(function(){
-            eligibility.push($(this).val());
-        });
         
         formData['title'] = title;
         formData['status'] = 'available';
@@ -111,9 +107,9 @@ function GetAllPosts() {
                 data: response,
                 "columns": [
                     { "data": "title" },
-                    { "data": "readiness" },
-                    { "data": "pickupAddress" },
-                    { "data": "creationDate",
+                    { "data": "readiness", className: "hide-mobile" },
+                    { "data": "pickupAddress", className: "hide-mobile" },
+                    { "data": "creationDate", className: "hide-mobile",
                     "render": function (data) {
                         var date = new Date(data);
                         var month = date.getMonth() + 1;
@@ -151,14 +147,14 @@ function GetAllPosts() {
                     data: response,
                     "columns": [
                         { "data": "title" },
-                        { "data": "readiness" },
-                        { "data": "pickupAddress" },
+                        { "data": "readiness", className: "hide-mobile" },
+                        { "data": "pickupAddress", className: "hide-mobile" },
                         { "data": "creationDate",
                         "render": function (data) {
                             var date = new Date(data);
                             var month = date.getMonth() + 1;
                             return (month.length > 1 ? month : "0" + month) + "/" + date.getDate() + "/" + date.getFullYear();
-                        } },
+                        }, className: "hide-mobile" },
                         { "data": "_id",
                         "render": function (id){
                             return "<a href='ViewPost.html?id=" + id + "'>View</a>";
@@ -203,7 +199,9 @@ function ViewPost(postId) {
                         $("#postTitle").text(response.title);
                         $("#title").text(response.title);
                         $("#status").text(response.status);
+                        $("#amount").text(response.amount);
                         $("#readiness").text(response.readiness);
+                        $("#eligibility").text(response.eligibility);
                         $("#description").text(response.description);
                         $("#pickupWindow").text(response.pickupWindow);
                         $("#pickupAddress").text(response.pickupAddress);
@@ -213,7 +211,39 @@ function ViewPost(postId) {
                         alert("some error");
                     }});
 
-                    }
+}
+
+function ContactDonor(subject, message) {
+    var formData = {};
+    
+    formData['subject'] = subject;
+    formData['message'] = message;
+    
+    var json = JSON.stringify(formData);
+    var authBearer = localStorage.getItem("authBearer");
+
+    // process the form
+    $.ajax({
+        type        : 'POST', 
+        url         : 'http://food.dlfsystems.com:10100/posts', 
+        data        : json, 
+        encode          : true,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader ("Authorization", authBearer);
+            xhr.setRequestHeader ("Content-Type", "application/json");
+        },
+        success: function(msg){
+            $("#createPost h4").html("Success");
+            $("#createPost form").html("Post created.");
+            $("#success-buttons").show();
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            console.log(XMLHttpRequest.response)
+            console.log(textStatus);
+            console.log(errorThrown);
+        }});
+
+}
 
                     function DeleteDonation(donationId) {
 

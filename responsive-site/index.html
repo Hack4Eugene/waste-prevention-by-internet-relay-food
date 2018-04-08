@@ -48,6 +48,9 @@
           <li class="nav-item">
               <a class="nav-link" href="TheMarket.html">The Market</a>
             </li>
+            <li class="nav-item" id="myposts-menu">
+              <a class="nav-link" href="MyPosts.html">My Posts</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="Contact.html">Contact</a>
             </li>
@@ -106,7 +109,7 @@
           <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
 
             <!-- Content -->
-            <div class="text-center white-text mx-5 wow fadeIn">
+            <div class="text-center white-text mx-5 wow fadeIn" id="carousel-content">
               <h1 class="mb-4">
                 <strong>Put food on the table, not in the landfill</strong>
               </h1>
@@ -163,7 +166,7 @@
 
 <script type="text/javascript">
     $(document).ready( function () {
-        $("#login-button").click(() => {
+        $("#login-button, #signup-button").click(() => {
           LoginUser();
           e.preventDefault();
         });

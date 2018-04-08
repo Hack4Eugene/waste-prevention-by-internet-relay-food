@@ -44,6 +44,9 @@
             <li class="nav-item active">
               <a class="nav-link" href="TheMarket.html">The Market</a>
             </li>
+            <li class="nav-item" id="myposts-menu">
+              <a class="nav-link" href="MyPosts.html">My Posts</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="Contact.html">Contact</a>
             </li>
@@ -118,6 +121,16 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                      <label class="col-sm-3">Availability</label>
+                      <div class="col-sm-9">
+                        <select name="availability" class="form-control">
+                          <option value="available">Available</option>
+                          <option value="claimed">Claimed</option>
+                          <option value="picked up">Picked Up</option>
+                        </select>
+                      </div>
+                  </div>
+                    <div class="form-group row">
                       <label class="col-sm-3">Weight</label>
                       <div class="col-sm-9">
                         <input id="weight" type="number" style="width:150px" class="form-control form-control-warning"><small class="form-text">Weight in pounds.</small>
@@ -146,17 +159,10 @@
 
                     <div class="form-group row">
                       <div class="col-sm-9 offset-sm-3">
-                        <a id="submit" class="btn btn-primary">Create</a>
+                        <a id="submit" class="btn btn-primary">Update</a>
                       </div>
                     </div>
                   </form>
-
-                  <div class="form-group row" style="display: none;" id="success-buttons">
-                    <div class="col-sm-9 offset-sm-3">
-                      <a id="viewPost" href="TheMarket.html" class="btn btn-primary">View</a>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -193,7 +199,6 @@
     // Animations initialization
     new WOW().init();
   </script>
-  <script src="vendor/dataTables/js/jquery.dataTables.min.js"></script>
   <!-- Main File-->
   <script src="js/Post.js"></script>
   <script src="js/User.js"></script>
@@ -206,7 +211,14 @@
         var desc = $("#description").val();
         var window = $("#pickupWindow").val();
         var location = $("#pickupAddress").val();
-        UpdatePost(title, amount, desc, window, location);
+        var eligibility = [];
+        $("input:checkbox[id^='eligibility-']:checked").each(function(){
+            eligibility.push($(this).val());
+        });
+        var availability = $("#readiness option:selected").val();
+        var readiness = $("#readiness option:selected").val();
+
+        UpdatePost(title, amount, desc, window, location, availability, readiness, eligibility);
       });
       LoadUser();
     });
