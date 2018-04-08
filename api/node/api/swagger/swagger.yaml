@@ -347,7 +347,7 @@ definitions:
         type: integer
         format: int64
         description: The total number of tracks that matched the query.
-      matches:
+      results:
         type: array
         description: The posts that matched the query.
         items:

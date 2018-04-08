@@ -15,7 +15,7 @@ import java.util.List;
 
 public class PostModel implements Parcelable{
     public String _id; // Don't fill out this
-    public Date creationDate;
+    public String creationDate;
     public String email;
     public String title;
     public String status;
@@ -34,7 +34,7 @@ public class PostModel implements Parcelable{
 
     public void writeToParcel(Parcel out, int flags) {
         out.writeString(_id);
-        out.writeString(creationDate.toString());
+        out.writeString(creationDate);
         out.writeString(email);
         out.writeString(title);
         out.writeString(status);
@@ -65,13 +65,7 @@ public class PostModel implements Parcelable{
     private PostModel(Parcel in) {
         _id = in.readString();
         DateFormat formatter = DateFormat.getDateInstance();
-        try {
-            creationDate = formatter.parse(in.readString());
-        }
-        catch (ParseException e)
-        {
-            creationDate = Calendar.getInstance().getTime();
-        }
+        creationDate = in.readString();
         email = in.readString();
         title = in.readString();
         status = in.readString();

@@ -19,6 +19,7 @@ import com.auth0.android.management.ManagementException;
 import com.auth0.android.management.UsersAPIClient;
 import com.auth0.android.result.UserProfile;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import h4cirf.com.h4cinternetrelayfood.models.PostModel;
 import okhttp3.OkHttpClient;
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     Retrofit provideRetrofit(OkHttpClient httpClient)
     {
         return new Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create(new Gson()))
+                .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create()))
                 .baseUrl(API_URL)
                 .client(httpClient)
                 .build();
@@ -154,6 +155,8 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // The user posted, time to refresh our fragment
                 //switchToPostList();
+                PostModel post = data.getParcelableExtra("post");
+                //postListFragment.post(post);
             }
         }
     }

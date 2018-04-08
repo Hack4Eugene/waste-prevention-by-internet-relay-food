@@ -26,15 +26,15 @@
         <item>Miscellaneous</item>
     </string-array>
     <string-array name="status_spinner_array">
-        <item>Available</item>
-        <item>Claimed</item>
-        <item>Picked up</item>
+        <item>available</item>
+        <item>claimed</item>
+        <item>picked up</item>
     </string-array>
     <string-array name="readiness_spinner_array">
         <item>Select food readiness</item>
-        <item>Packed</item>
-        <item>Packable</item>
-        <item>Harvestable</item>
+        <item>packed</item>
+        <item>packable</item>
+        <item>harvestable</item>
     </string-array>
     <string name="reusable_edit_quantity">Weight (lbs)</string>
     <string name="reusable_edit_pickup_date">Pickup date and time</string>

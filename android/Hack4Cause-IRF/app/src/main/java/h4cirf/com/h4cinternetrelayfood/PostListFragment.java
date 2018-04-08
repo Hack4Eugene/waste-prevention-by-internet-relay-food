@@ -15,14 +15,18 @@ import android.widget.SearchView;
 import com.amazonaws.http.HttpResponse;
 import com.auth0.android.Auth0;
 import com.auth0.android.management.UsersAPIClient;
+import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import h4cirf.com.h4cinternetrelayfood.models.PostModel;
 import h4cirf.com.h4cinternetrelayfood.models.PostSearchModel;
@@ -45,6 +49,7 @@ public class PostListFragment extends Fragment {
     private PostListAdapter adapter;
     private ListView listView;
     SearchView searchView;
+    Intent intent;
 
     public PostListFragment() {
         // Required empty public constructor
@@ -74,6 +79,18 @@ public class PostListFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_post_list, container, false);
 
+        /*
+        // Go to map view
+        //intent = new Intent(getActivity(), PostMapActivity);
+        // final Button button = (Button) view.findViewById(R.id.mapButton);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(intent);
+            }
+        });
+        */
+
         // Get the first POSTS_PER_PAGE posts and put it in our list
         posts = new ArrayList<>();
         listView = view.findViewById(R.id.postListView);
@@ -93,23 +110,46 @@ public class PostListFragment extends Fragment {
             }
         });
         view.requestFocus();
-        /*
+        //*
         // Populate our database
         MainActivity parentActivity = (MainActivity) getActivity();
         PostModel tempModel = new PostModel();
         tempModel.amount = "20";
-        tempModel.creationDate = Calendar.getInstance().getTime();
+
+        TimeZone tz = TimeZone.getTimeZone("UTC");
+        DateFormat df = new SimpleDateFormat("yyy-MM-dd'T'HH:mm'Z'");
+        df.setTimeZone(tz);
+        String date = df.format(new Date());
+        tempModel.creationDate = date;
         tempModel.description = "Lots of carrots";
         tempModel.pickupAddress = "1395 University St, Eugene, OR 97403";
         tempModel.readiness = "packed";
         tempModel.pickupWindow = "Now or never";
         tempModel.title = "Huge carrots!";
         tempModel.status = "available";
-        //tempModel.email = MainActivity.userProfile.getEmail();
-        tempModel.email = "b1t@ymail.com";
+        tempModel.email = MainActivity.userProfile.getEmail();
+        //tempModel.email = "b1t@ymail.com";
         //parentActivity.viewPost(tempModel);
-        for(int i = 0; i < 20; ++i)
-            posts.add(tempModel);
+        //for(int i = 0; i < 20; ++i)
+        //    posts.add(tempModel);
+        //*/
+        /*
+
+        System.out.println(new Gson().toJson(tempModel));
+        MainActivity.api.doPostPost(MainActivity.tokenID, tempModel).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                System.out.println("Werked");
+                System.out.println("Was succ? " + response.isSuccessful());
+                //returnToMain(true);
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                System.err.println(" DEBUG: Failed: is tokenID null: " + (MainActivity.tokenID == null));
+                //returnToMain(false);
+            }
+        });
         //*/
 
         // Get our list
