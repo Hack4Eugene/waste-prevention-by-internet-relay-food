@@ -157,11 +157,7 @@ function GetAllPosts() {
                         }, className: "hide-mobile" },
                         { "data": "_id",
                         "render": function (id){
-                            return "<a href='ViewPost.html?id=" + id + "'>View</a>";
-                        } },
-                        { "data": "_id",
-                        "render": function (id){
-                            return "<a href='EditPost.html?id=" + id + "'>Edit</a>";
+                            return "<a href='ViewPost.html?id=" + id + "'>View</a> <a href='EditPost.html?id=" + id + "'>Edit</a>";
                         } }
                     ]
                   });
@@ -198,13 +194,18 @@ function ViewPost(postId) {
                       success: function(response){
                         $("#postTitle").text(response.title);
                         $("#title").text(response.title);
+                        $("#title").val(response.title);
                         $("#status").text(response.status);
                         $("#amount").text(response.amount);
+                        $("#amount").val(response.amount);
                         $("#readiness").text(response.readiness);
                         $("#eligibility").text(response.eligibility);
                         $("#description").text(response.description);
+                        $("#description").val(response.description);
                         $("#pickupWindow").text(response.pickupWindow);
+                        $("#pickupWindow").val(response.pickupWindow);
                         $("#pickupAddress").text(response.pickupAddress);
+                        $("#pickupAddress").val(response.pickupAddress);
                         $("#creationDate").text(response.creationDate);
                     },
                     error: function(XMLHttpRequest, textStatus, errorThrown) {
