@@ -56,7 +56,7 @@ function search(req, res) {
   const searchParams = req.body;
   const countQuery = buildFindQuery(searchParams);
   let count;
-  //console.log("** searchParams: " + util.inspect(searchParams));
+  console.log("** searchParams: " + util.inspect(searchParams));
   countQuery.count().then( function (howMany) {
     count = howMany;
     const find = buildFindQuery(searchParams);
@@ -68,15 +68,14 @@ function search(req, res) {
     }
     return find.exec();
   }).then( function (data) {
-    //console.log("** results: " + util.inspect(data));
     const responseObj = {
       matchCount: count,
       results: data
     };
-    //console.log("** done");
+    console.log("** done: " + util.inspect(responseObj));
     res.status(200).json(responseObj);
   }).catch( function (error) {
-    //console.log("** error: " + util.inspect(error));
+    console.log("** error: " + util.inspect(error));
     res.status(500).send("Unexpected error: " + util.inspect(error));
   });
 }
@@ -124,6 +123,7 @@ function getEmailFromToken(token, req, res, callback) {
  token = token.replace(/bearer /i, "");
  jwt.verify(token, authKey, { "algorithms": [ "RS256", "HS256" ], "issuer": "https://irf.auth0.com/" }, function (err, decoded) {
    if (err) {
+     console.log("Error parsing token: " + err);
      throw err;
      return null;
    } else {
@@ -138,8 +138,10 @@ function addPostVerified(req, res, email) {
     return;
   }
 
+    console.log("add post: " + util.inspect(req.body));
     const post = Post(req.body);
     post.email = email;
+    console.log("post: " + util.inspect(post));
     post.save(function (error) {
       if (error) {
         res.status(500).send('Error saving new post: ' + util.inspect(error));
