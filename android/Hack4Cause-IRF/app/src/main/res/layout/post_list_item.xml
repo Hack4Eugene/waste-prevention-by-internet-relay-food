@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/postListFoodTypeText"
+        android:layout_width="@dimen/post_list_type_size"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:hint="Type"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postListDescription" />
+
+    <TextView
+        android:id="@+id/postListDescription"
+        android:layout_width="@dimen/post_list_information_size"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:hint="Description"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/postListFoodTypeText"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/postListWeight"
+        android:layout_width="@dimen/post_list_information_size"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:hint="Weight"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="@+id/postListDescription"
+        app:layout_constraintTop_toBottomOf="@+id/postListDescription" />
+
+    <TextView
+        android:id="@+id/postListExpiry"
+        android:layout_width="@dimen/post_list_information_size"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"
+        android:hint="Expiry"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/postListWeight"
+        app:layout_constraintTop_toBottomOf="@+id/postListWeight" />
+
+</android.support.constraint.ConstraintLayout>

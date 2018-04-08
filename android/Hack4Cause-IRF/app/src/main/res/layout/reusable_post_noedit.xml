@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/reusableEditFoodTypeNE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginStart="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginTop="8dp">
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/reusableEditFoodTypeTextNE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/reusable_edit_food_type"
+                android:inputType="none"
+                android:selectAllOnFocus="false"
+                android:singleLine="true" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/reusableEditQuantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginStart="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginLeft="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginRight="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginTop="8dp">
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/reusableEditQuantityTextNE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/reusable_edit_quantity"
+                android:inputType="none"
+                android:selectAllOnFocus="false"
+                android:singleLine="true" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/reusableEditPickupTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginStart="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginLeft="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginRight="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginTop="8dp" >
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/reusableEditPickupTimeTextNE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/reusable_edit_pickup_date"
+                android:inputType="none"
+                android:selectAllOnFocus="false"
+                android:singleLine="true" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/reusableEditAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginStart="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginLeft="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginRight="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginTop="8dp" >
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/reusableEditAddressTextNE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/reusable_edit_address"
+                android:inputType="none"
+                android:selectAllOnFocus="false"
+                android:singleLine="false" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/reusableEditContactInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginStart="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginLeft="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginRight="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginTop="8dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/reusableEditContactInfoTextNE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/reusable_edit_contact_information"
+                android:inputType="none"
+                android:selectAllOnFocus="false" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/reusableEditExpiration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginStart="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginLeft="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginRight="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginTop="8dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/reusableEditExpirationTextNE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/reusable_edit_expiry"
+                android:inputType="none"
+                android:selectAllOnFocus="false"
+                android:singleLine="true" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/reusableEditDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginStart="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginLeft="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginRight="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginTop="8dp" >
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/reusableEditDescriptionTextNE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/reusable_edit_description"
+                android:inputType="none"
+                android:selectAllOnFocus="false"
+                android:singleLine="true" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/reusableEditReadinessNE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginStart="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginTop="8dp">
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/reusableEditReadinessTextNE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/reusable_edit_readiness"
+                android:inputType="none"
+                android:selectAllOnFocus="false"
+                android:singleLine="true" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/reusableEditStatusNE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginStart="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginTop="8dp">
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/reusableEditStatusTextNE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/reusable_edit_status"
+                android:inputType="none"
+                android:selectAllOnFocus="false"
+                android:singleLine="true" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/reusableEditCommentNE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginLeft="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginRight="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginStart="@dimen/reusable_edit_horizontal_margin"
+            android:layout_marginTop="8dp">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/reusableEditCommentTextNE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/reusable_edit_comment"
+                android:inputType="none"
+                android:selectAllOnFocus="false"
+                android:singleLine="false" />
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+</ScrollView>
