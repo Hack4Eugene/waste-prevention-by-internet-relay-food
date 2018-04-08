@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                 // The user posted, time to refresh our fragment
                 //switchToPostList();
                 PostModel post = data.getParcelableExtra("post");
-                postListFragment.post(post);
+                //postListFragment.post(post);
             }
         }
     }
