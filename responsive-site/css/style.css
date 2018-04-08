@@ -29,12 +29,12 @@ body,
       .card-header {
         border-bottom: 0px !important;
     }
-    
+
     .card-header h4 {
         text-align: center;
         width: 100%;
     }
-    
+
     #donationMap iframe {
         width: 100%;
     }
@@ -52,22 +52,22 @@ body,
   padding-bottom: 25px;
 }
 
-    
+
     @media (min-width: 641px) {
         #createNewDonation {
             margin-left: 20px;
         }
     }
-    
+
     @media (max-width: 640px) {
         .hide-mobile {
             display: none;
         }
-    
+
         #availableDonations {
             padding: 0px !important;
         }
-    
+
     }
 
 /* Adjustment for mobile devices*/
@@ -85,9 +85,13 @@ body,
 /* Adding color to the Navbar on mobile */
 @media only screen and (max-width: 768px) {
   .navbar {
-    background-color: #929FBA; } 
+    background-color: #929FBA; }
   }
 
 /* Footer color for sake of consistency with Navbar */
 .page-footer {
   background-color: #929FBA; }
+
+.food-stats {
+  margin-top: 15vh;
+}
