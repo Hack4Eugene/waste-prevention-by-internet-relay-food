@@ -7,6 +7,7 @@ const util = require('util');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const Post = mongoose.models.Post;
+const User = mongoose.models.User;
 
 const AWS = require('aws-sdk');
 var credentials = new AWS.SharedIniFileCredentials({profile: 'default'});
@@ -109,9 +110,9 @@ function getPost(req, res) {
      });
 }
 
+// Called before verification
 function addPost(req, res) {
     var authHeader = req.header("Authorization");
-
     var email = getEmailFromToken(authHeader, req, res, authHeader, addPostVerified);
 }
 
@@ -134,7 +135,7 @@ function getEmailFromToken(token, req, res, callback) {
 
 function addPostVerified(req, res, email) {
   if (email == "error") {
-    return
+    return;
   }
 
     const post = Post(req.body);
@@ -212,3 +213,4 @@ function validateUpload(req, res) {
   });
 
 }
+

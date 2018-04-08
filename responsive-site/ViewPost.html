@@ -15,6 +15,9 @@
     <!-- Your custom styles (optional) -->
     <link href="css/style.css" rel="stylesheet">
 
+
+    <script src="WebClientpullingfromDB/viewPosts.js"></script>
+
     <link rel="stylesheet" href="vendor/dataTables/css/jquery.dataTables.min.css">
 </head>
 
@@ -25,7 +28,7 @@
     <div class="container">
 
       <!-- Brand -->
-      <a class="navbar-brand" href="https://mdbootstrap.com/material-design-for-bootstrap/" target="_blank">
+      <a class="navbar-brand" href="index.html" target="_blank">
         <strong>Food Rescue</strong>
       </a>
 
@@ -58,10 +61,10 @@
               <a class="nav-link" href="Help.html">Help</a>
             </li>
           </ul>
-  
+
           <!-- Right -->
           <ul class="navbar-nav nav-flex-icons">
-            
+
               <li class="nav-item">
                   <a href="Profile.html" class="nav-link border border-light rounded"
                     target="_blank">
@@ -93,34 +96,52 @@
               <div class="col-lg-12 no-gutter">
             <div class="card">
               <div class="card-header d-flex align-items-center">
-                <h4>Title</h4>
+                <h4 id="postTitle">Title</h4>
               </div>
               <div class="card-body">
                 <p></p>
                 <form class="form-horizontal">
                   <div class="form-group row">
-                    <label class="col-sm-3">Title</label>
+                    <label class="col-sm-3">Amount</label>
                     <div class="col-sm-9">
-                      <label id="title">Donation 1</label><small class="form-text"></small>
+                      <label id="amount">4</label> lbs
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-sm-3">Weight</label>
+                    <label class="col-sm-3">Readiness</label>
                     <div class="col-sm-9">
-                      <label id="weight">4</label> lbs
+                      <label id="readiness">Donation 1</label><small class="form-text"></small>
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-sm-3">Expiration Date</label>
+                    <label class="col-sm-3">Description</label>
                     <div class="col-sm-9">
-                      <label id="expirationDate">Donation 1</label><small class="form-text"></small>
+                      <label id="description"></label><small class="form-text"></small>
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-sm-3">Location</label>
-                    <div class="col-sm-9">
-                      <label id="location"></label><small class="form-text"></small>
-                    </div>
+                      <label class="col-sm-3">Pickup Window</label>
+                      <div class="col-sm-9">
+                        <label id="pickupWindow"></label><small class="form-text"></small>
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <label class="col-sm-3">Pickup Address</label>
+                      <div class="col-sm-9">
+                        <label id="pickupAddress"></label><small class="form-text"></small>
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <label class="col-sm-3">Creation Date</label>
+                      <div class="col-sm-9">
+                        <label id="creationDate"></label><small class="form-text"></small>
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <label class="col-sm-3">Status</label>
+                      <div class="col-sm-9">
+                        <label id="status"></label><small class="form-text"></small>
+                      </div>
                   </div>
 
                   <div class="form-group row">
@@ -149,8 +170,7 @@
               <div class="card-header d-flex align-items-center">
                 <h4>Location</h4>
               </div>
-              <div class="card-body" id="donationMap">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d11470.757363904571!2d-123.10017264999998!3d44.048472350000004!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1523083932604" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+              <div class="card-body" id="map" style="height:500px;">
               </div>
             </div>
           </div>
@@ -175,6 +195,15 @@
   <!--/.Footer-->
 
     <!-- SCRIPTS -->
+
+    <script async defer src="WebClientpullingfromDB/google.js">
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuUJl43vI8auaFBkq5WDQC5rF-FV71hK4&callback=initMap">
+    </script>
+
+    <script defer>
+    </script>
+
     <!-- JQuery -->
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap tooltips -->
@@ -190,14 +219,13 @@
   </script>
   <script src="vendor/dataTables/js/jquery.dataTables.min.js"></script>
   <!-- Main File-->
-  <script src="js/front.js"></script>
-  <script src="js/Donation.js"></script>
+  <script src="js/Post.js"></script>
   <script src="js/User.js"></script>
 
   <script type="text/JavaScript">
     $(document).ready( function () {
-      $('#donationsTable').DataTable();
-      //CreateUser("testuser1", "test1@test.com", "Donor");
+      var id = getUrlParameter("id");
+      ViewPost(id);
 
     } );
   </script>

@@ -14,7 +14,7 @@
     <link href="css/mdb.min.css" rel="stylesheet">
     <!-- Your custom styles (optional) -->
     <link href="css/style.css" rel="stylesheet">
-
+    <script src="WebClientpullingfromDB/viewPosts.js"></script>
     <link rel="stylesheet" href="vendor/dataTables/css/jquery.dataTables.min.css">
 </head>
 
@@ -25,8 +25,8 @@
     <div class="container">
 
       <!-- Brand -->
-      <a class="navbar-brand" href="https://mdbootstrap.com/material-design-for-bootstrap/" target="_blank">
-        <strong>MDB</strong>
+      <a class="navbar-brand" href="/" target="_blank">
+        <strong>Food Rescue</strong>
       </a>
 
       <!-- Collapse -->
@@ -40,13 +40,12 @@
 
         <!-- Left -->
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">Home
-                  <span class="sr-only">(current)</span>
-                </a>
-              </li>
             <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+            <li class="nav-item active">
                 <a class="nav-link" href="TheMarket.html">The Market</a>
+                <span class="sr-only">(current)</span>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="Contact.html">Contact</a>
@@ -58,12 +57,12 @@
                 <a class="nav-link" href="Help.html">Help</a>
               </li>
           </ul>
-  
+
           <!-- Right -->
           <ul class="navbar-nav nav-flex-icons">
-            
+
             <li class="nav-item">
-              <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="nav-link border border-light rounded"
+              <a href="index.html" class="nav-link border border-light rounded"
                 target="_blank">
                 Sign Up
               </a>
@@ -98,27 +97,14 @@
                   <thead>
                     <tr>
                       <th>Title</th>
-                      <th class="hide-mobile">Type</th>
+                      <th class="hide-mobile">Readiness</th>
                       <th class="hide-mobile">Address</th>
                       <th class="hide-mobile">Posted</th>
                       <th></th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td>Carrots</td>
-                      <td class="hide-mobile">Food</td>
-                      <td class="hide-mobile">The DAC</td>
-                      <td class="hide-mobile">Today</td>
-                      <td><a href="ViewPost.html?id=1">View</a></td>
-                    </tr>
-                    <tr>
-                      <td>Carrots</td>
-                      <td class="hide-mobile">Food</td>
-                      <td class="hide-mobile">The DAC</td>
-                      <td class="hide-mobile">Today</td>
-                      <td><a href="ViewPost.html?id=1">View</a></td>
-                    </tr>
+                  <tbody id="tableRows">
+
                   </tbody>
                 </table>
               </div>
@@ -131,8 +117,7 @@
               <div class="card-header d-flex align-items-center">
                 <h4>Location</h4>
               </div>
-              <div class="card-body" id="donationMap">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d11470.757363904571!2d-123.10017264999998!3d44.048472350000004!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1523083932604" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+              <div class="card-body" id="map" style="display:block; height: 500px;">
               </div>
             </div>
           </div>
@@ -159,6 +144,11 @@
   <!--/.Footer-->
 
     <!-- SCRIPTS -->
+    <script async defer src="WebClientpullingfromDB/google.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuUJl43vI8auaFBkq5WDQC5rF-FV71hK4&callback=initMap">
+    </script>
+
+
     <!-- JQuery -->
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap tooltips -->
@@ -179,7 +169,9 @@
 
   <script type="text/JavaScript">
     $(document).ready( function () {
-      AddUserToSession();
+      var posts = GetAllPosts();
+      //AddUserToSession();
+
     } );
   </script>
 </body>
