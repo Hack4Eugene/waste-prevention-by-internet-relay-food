@@ -23,9 +23,10 @@ module.exports = {
 
 // Endpoint implementations
 
-function addUser(req, res) {
-  const user = User(req.body);
-  // Make sure the username is unique
+
+function addUserVerified(req, res, email) {
+  const user = User({"username" : email, "role" : "user", "created" : "to-be-implented", "email": email});
+
   User.findOne({ username: user.username}).then( function (existing) {
     if (existing) {
       throw "Username '" + user.username + "' is taken.";
@@ -34,11 +35,35 @@ function addUser(req, res) {
   }).then( function (encryptedPassword) {
     return user.save();
   }).then( function (data) {
+    console.log("User " + email + " created")
     res.status(200).end(); // No body will be sent
   }).catch( function (error) {
     res.status(500).send('Error adding user: ' + util.inspect(error));
   });
 }
+
+// Called before verification
+function addUser(req, res) {
+    var authHeader = req.header("Authorization");
+    var email = getEmailFromToken(authHeader, req, res, authHeader, addUserVerified);
+}
+
+function getEmailFromToken(token, req, res, callback) {
+
+  const authKey = "-----BEGIN CERTIFICATE-----\nMIIC9TCCAd2gAwIBAgIJT/D4Z70A53iZMA0GCSqGSIb3DQEBCwUAMBgxFjAUBgNVBAMTDWlyZi5hdXRoMC5jb20wHhcNMTgwNDA3MDY0MDA4WhcNMzExMjE1MDY0MDA4WjAYMRYwFAYDVQQDEw1pcmYuYXV0aDAuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwnl3R1vlP7G63vk5vTwdG7XKIJRyOtw38jkVpZ754JMhr7cxIefb6cqrhmmVA2atB90P5sQILVdfq4Jo7y+dBBGL6ZtnPSUnWWvISMCYsJi0Wbbc4HlZZMlC3hLP2isZL70RLcBJWQbuAFM5XH8nutJTjqj1KQbjxMkn5892JQMuchtjr6iTnIu00bFy/7lWm6pIWAAKICFkvntXadEQhEt6CHA9QcRLuUy2bOjgHFY+CBqFVfzlJ/kfvNISeuf8Rp0h1v7kaB2r4wGAEx5DK28EKCp3ZDeqvrHEPeHc6UA/e0Y8Oi2dfdMyphvjwLl0lKIBi8MJmelAbqzOtensiQIDAQABo0IwQDAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBTDk/6ggHGnZgmQGjQpsojN2RzphDAOBgNVHQ8BAf8EBAMCAoQwDQYJKoZIhvcNAQELBQADggEBAKmB4lF5cFNFpn8tuZEVbILvzkGwxTXy2zz8IPStrCLa8YCyjQjcsKF3kss+Oay8WbXqjEIIsc0Kzox/Z0GfbUdgThv1ADzu8DQLDmoyyBTUAErbjo9yflVKqiwY7mT7KzN6CaT6e6h9wpWKKbjPSXjRZfxR1+NGENx3/wytA3zirWhv9/hxz3hxC7d6nu75MJGkWomoYS7d8uvOQR6Lt+QMJJqlc05qMRkCPflvq4ik1CYO6GTfHZp+TYfL5tOlZBo8GzVZVqK0Dtt710d5jftzn6j8iv2pSuy/ydxzhsD8bhDMDCIgMQEJ/5DbdKK7g/ZRUuqNBCS+JWaR9dBaPAI=\n-----END CERTIFICATE-----";
+
+ console.log("Verifying token: " + token);
+ token = token.replace(/bearer /i, "");
+ jwt.verify(token, authKey, { "algorithms": [ "RS256", "HS256" ], "issuer": "https://irf.auth0.com/" }, function (err, decoded) {
+   if (err) {
+     throw err;
+     return null;
+   } else {
+     addUserVerified(req, res, decoded.email);
+   }
+
+ });
+};
 
 function updateUser(req, res) {
   // TODO: Permission check
@@ -138,4 +163,3 @@ function getEmailFromToken(token) {
    return null;
  }
 };
-

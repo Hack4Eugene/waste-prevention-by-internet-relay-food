@@ -208,12 +208,6 @@ paths:
       operationId: addUser
       consumes:
         - application/json
-      parameters:
-        - name: body
-          in: body
-          required: true
-          schema:
-            $ref: '#/definitions/User'
       responses:
         '200':
           description: Success.

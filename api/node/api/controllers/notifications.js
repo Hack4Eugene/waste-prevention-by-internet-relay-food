@@ -97,4 +97,3 @@ function getEmailFromToken(token, req, res, callback) {
    return null;
  }
 };
-
