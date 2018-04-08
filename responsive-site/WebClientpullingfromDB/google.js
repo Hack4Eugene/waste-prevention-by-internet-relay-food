@@ -25,7 +25,4 @@ function initMap() {
     });
     dac.send();
 
-    var params ={ address: 'Eugene, OR', geo: null}
-    returnGeoLocation(params);
-    console.log("the params are now", params);
-}
+  }
