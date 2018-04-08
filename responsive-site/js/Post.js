@@ -10,9 +10,6 @@
     reader.readAsArrayBuffer(file);
 }*/
 
-<<<<<<< HEAD
-        var authBearer = localStorage.getItem("authBearer"); 
-=======
 
 function CreatePost(title, amount, description, pickupWindow, pickupAddress, readiness) {
         var formData = {};
@@ -34,7 +31,6 @@ function CreatePost(title, amount, description, pickupWindow, pickupAddress, rea
         
         var json = JSON.stringify(formData);
         var authBearer = localStorage.getItem("authBearer");
->>>>>>> 65ba3d5b9eaab63c3fb1e25ec76459b77e378bc0
 
         // process the form
         $.ajax({
@@ -61,15 +57,20 @@ function CreatePost(title, amount, description, pickupWindow, pickupAddress, rea
 
 function UpdatePost(title, amount, description, pickupWindow, pickupAddress, available, readiness) {
     var formData = {};
-    formData['title'] = title;
-    formData['status'] = available;
-    formData['eligibility'] = [ "business" ];
-    formData['readiness'] = readiness;
-    formData['description'] = description;
-    formData['pickupWindow'] = pickupWindow;
-    formData['pickupAddress'] = pickupAddress;
-    formData['creationDate'] = "" + new Date().toLocaleString();
-    formData['user'] = "5ac8ae15982abe65368ca658";
+        var eligibility = [];
+        $("input:checkbox[id^='eligibility-']:checked").each(function(){
+            eligibility.push($(this).val());
+        });
+        
+        formData['title'] = title;
+        formData['status'] = 'available';
+        formData['eligibility'] = eligibility;
+        formData['readiness'] = readiness;
+        formData['description'] = description;
+        formData['pickupWindow'] = pickupWindow;
+        formData['pickupAddress'] = pickupAddress;
+        formData['creationDate'] = "" + new Date().toLocaleString();
+        formData['user'] = "5ac8ae15982abe65368ca658";
 
     
     var json = JSON.stringify(formData);

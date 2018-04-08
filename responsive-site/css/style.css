@@ -100,3 +100,16 @@ body,
   text-align: center;
   margin: 5vh 2.5vw;
 }
+
+.big-number {
+  font-size: 70px;
+  font-family: 'Oswald', sans-serif;
+}
+
+.food-stat-div {
+  position: relative;
+  top: 75px;
+  margin-top: -10vh;
+
+  padding: 0 50px;
+}
