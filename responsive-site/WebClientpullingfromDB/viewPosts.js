@@ -29,6 +29,9 @@ function returnGeoLocation(params){
 
     var results = JSON.parse(event.target.response);
     console.log(results['results'][0]);
+    if (results['results'][0] == undefined || results['results'][0] == null) {
+      return
+    }
     params.geo = results['results'][0]['geometry']['location'];
 
 // update the global marker
@@ -86,7 +89,7 @@ function addSponsor(params){
   var addPost = new XMLHttpRequest();
 
   var postURL = "http://food.dlfsystems.com:10100/posts";
-  addPost.open("POST",postURL);
+  addPost.open("POST", postURL);
 
   addPost.setRequestHeader('Content-Type', 'application/json');
 
@@ -165,7 +168,7 @@ function populateMostRecent(){
   getRecent.addEventListener('load',function(event){
     results = JSON.parse(event.target.response);
     console.log("here is our database: ",results);
-    results.forEach(addtoGlobMap);
+    results.forEach(addAddresstoGlobMap);
   });
   getRecent.send();
 // end the post request ..
