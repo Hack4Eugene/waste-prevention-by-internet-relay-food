@@ -31,15 +31,18 @@ function returnGeoLocation(params){
     console.log(results['results'][0]);
     params.geo = results['results'][0]['geometry']['location'];
 
-    console.log('the title snhould be: ', params.title)
 // update the global marker
     mapMarkers.push(new google.maps.Marker({
        position: params.geo,
        title: params.title,
        map: mapManifest
      }));
-     console.log('this is the marker',mapMarkers[mapMarkers.length-1]);
-     mapMarkers[mapMarkers.length-1].addListener('click',toggleBounce);
+
+    mapMarkers[mapMarkers.length-1].addEventListener('click',function(event){
+      console.log(mapMarkers);
+
+
+    })
 
   });
   get_.send();
