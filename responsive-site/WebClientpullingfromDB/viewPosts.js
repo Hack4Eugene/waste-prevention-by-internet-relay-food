@@ -4,10 +4,11 @@ var highlightedPost = null;
 
 function toggleBounce(cope_) {
 
-  if (cope_.getAnimation() !== null) {
-    cope_.setAnimation(null);
+  console.log(cope_)
+  if (mapMarkers[mapMarkers.length-1].getAnimation() !== null) {
+    mapMarkers[mapMarkers.length-1].setAnimation(null);
   } else {
-    cope_.setAnimation(google.maps.Animation.BOUNCE);
+    mapMarkers[mapMarkers.length-1].setAnimation(google.maps.Animation.BOUNCE);
   }
 }
 

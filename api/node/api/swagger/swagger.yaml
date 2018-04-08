@@ -285,6 +285,22 @@ paths:
         in: path
         required: true
         type: string
+  '/users/posts':
+    x-swagger-router-controller: users
+    get:
+      tags:
+        - Users
+      summary: Get all posts for a user.
+      operationId: getPosts
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Success.
+          schema:
+            type: array
+            items:
+             $ref: '#/definitions/Post'
 definitions:
   Post:
     type: object

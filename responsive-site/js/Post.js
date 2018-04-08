@@ -10,6 +10,9 @@
     reader.readAsArrayBuffer(file);
 }*/
 
+<<<<<<< HEAD
+        var authBearer = localStorage.getItem("authBearer"); 
+=======
 
 function CreatePost(title, amount, description, pickupWindow, pickupAddress, readiness) {
         var formData = {};
@@ -31,6 +34,7 @@ function CreatePost(title, amount, description, pickupWindow, pickupAddress, rea
         
         var json = JSON.stringify(formData);
         var authBearer = localStorage.getItem("authBearer");
+>>>>>>> 65ba3d5b9eaab63c3fb1e25ec76459b77e378bc0
 
         // process the form
         $.ajax({
@@ -48,7 +52,9 @@ function CreatePost(title, amount, description, pickupWindow, pickupAddress, rea
                 $("#success-buttons").show();
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
-                alert("some error");
+                console.log(XMLHttpRequest.response)
+                console.log(textStatus);
+                console.log(errorThrown);
             }});
 
 }
