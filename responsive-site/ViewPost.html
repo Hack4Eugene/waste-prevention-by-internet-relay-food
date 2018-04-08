@@ -93,35 +93,53 @@
               <div class="col-lg-12 no-gutter">
             <div class="card">
               <div class="card-header d-flex align-items-center">
-                <h4>Title</h4>
+                <h4 id="postTitle">Title</h4>
               </div>
               <div class="card-body">
                 <p></p>
                 <form class="form-horizontal">
                   <div class="form-group row">
-                    <label class="col-sm-3">Title</label>
+                    <label class="col-sm-3">Amount</label>
                     <div class="col-sm-9">
-                      <label id="title">Donation 1</label><small class="form-text"></small>
+                      <label id="amount">4</label> lbs
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-sm-3">Weight</label>
+                    <label class="col-sm-3">Readiness</label>
                     <div class="col-sm-9">
-                      <label id="weight">4</label> lbs
+                      <label id="readiness">Donation 1</label><small class="form-text"></small>
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-sm-3">Expiration Date</label>
+                    <label class="col-sm-3">Description</label>
                     <div class="col-sm-9">
-                      <label id="expirationDate">Donation 1</label><small class="form-text"></small>
+                      <label id="description"></label><small class="form-text"></small>
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label class="col-sm-3">Location</label>
-                    <div class="col-sm-9">
-                      <label id="location"></label><small class="form-text"></small>
-                    </div>
+                      <label class="col-sm-3">Pickup Window</label>
+                      <div class="col-sm-9">
+                        <label id="pickupWindow"></label><small class="form-text"></small>
+                      </div>
                   </div>
+                  <div class="form-group row">
+                      <label class="col-sm-3">Pickup Address</label>
+                      <div class="col-sm-9">
+                        <label id="pickupAddress"></label><small class="form-text"></small>
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <label class="col-sm-3">Creation Date</label>
+                      <div class="col-sm-9">
+                        <label id="creationDate"></label><small class="form-text"></small>
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <label class="col-sm-3">Status</label>
+                      <div class="col-sm-9">
+                        <label id="status"></label><small class="form-text"></small>
+                      </div>
+                  </div>    
 
                   <div class="form-group row">
                     <div class="col-sm-12 text-center">
@@ -190,14 +208,13 @@
   </script>
   <script src="vendor/dataTables/js/jquery.dataTables.min.js"></script>
   <!-- Main File-->
-  <script src="js/front.js"></script>
-  <script src="js/Donation.js"></script>
+  <script src="js/Post.js"></script>
   <script src="js/User.js"></script>
 
   <script type="text/JavaScript">
     $(document).ready( function () {
-      $('#donationsTable').DataTable();
-      //CreateUser("testuser1", "test1@test.com", "Donor");
+      var id = getUrlParameter("id");
+      ViewPost(id);
 
     } );
   </script>

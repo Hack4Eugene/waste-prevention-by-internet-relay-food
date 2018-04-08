@@ -98,27 +98,14 @@
                   <thead>
                     <tr>
                       <th>Title</th>
-                      <th class="hide-mobile">Type</th>
+                      <th class="hide-mobile">Readiness</th>
                       <th class="hide-mobile">Address</th>
                       <th class="hide-mobile">Posted</th>
                       <th></th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td>Carrots</td>
-                      <td class="hide-mobile">Food</td>
-                      <td class="hide-mobile">The DAC</td>
-                      <td class="hide-mobile">Today</td>
-                      <td><a href="ViewPost.html?id=1">View</a></td>
-                    </tr>
-                    <tr>
-                      <td>Carrots</td>
-                      <td class="hide-mobile">Food</td>
-                      <td class="hide-mobile">The DAC</td>
-                      <td class="hide-mobile">Today</td>
-                      <td><a href="ViewPost.html?id=1">View</a></td>
-                    </tr>
+                  <tbody id="tableRows">
+                      
                   </tbody>
                 </table>
               </div>
@@ -179,7 +166,9 @@
 
   <script type="text/JavaScript">
     $(document).ready( function () {
-      AddUserToSession();
+      var posts = GetAllPosts();
+      //AddUserToSession();
+      
     } );
   </script>
 </body>
