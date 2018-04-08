@@ -4,9 +4,8 @@ const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
   title:  String,
-  userId: mongoose.Schema.ObjectId,
+  email: String,
   creationDate: Date,
-  title: String,
   status: String,
   eligibility: [String],
   amount: String,
