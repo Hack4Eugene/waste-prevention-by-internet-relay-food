@@ -369,7 +369,7 @@ definitions:
       matchCount:
         type: integer
         format: int64
-        description: The total number of tracks that matched the query.
+        description: The total number of posts that matched the query.
       results:
         type: array
         description: The posts that matched the query.
@@ -395,34 +395,6 @@ definitions:
       searchQuery:
         type: string
         description: The string to search for.
-  GetAllNotificationsRequest:
-    type : object
-    properties:
-      userId:
-        type: string
-        description: User to search for.
-      offset:
-        type: integer
-        format: int64
-        description: The offset into the search results.
-      limit:
-        type: integer
-        format: int64
-        description: The maximum number of search results to return.
-  GetAllNotificationsResponse:
-    type: object
-    required:
-      - matchCount
-    properties:
-      matchCount:
-        type: integer
-        format: int64
-        description: The total number of tracks that matched the query.
-      matches:
-        type: array
-        description: The notifications that matched the query.
-        items:
-          $ref: '#/definitions/Notification'
   Notification:
     type : object
     properties:
@@ -480,7 +452,7 @@ definitions:
         description: Access Control List spec.  Should be 'private'.
       key:
         type: string
-        description: The key the object will be stored under.  This should match the hash value that was submitted to the /tracks/upload/{hash} API call.
+        description: The key the object will be stored under.  This should match the hash value that was submitted to the /posts/upload/{hash} API call.
       X-Amz-Credential:
         type: string
         description: The spec for the IAM key being used.
@@ -496,4 +468,4 @@ definitions:
       X-Amz-Signature:
         type: string
         description: The sig for the request.
-    description: The form inputs we'll need when submitting a track to S3.
+    description: The form inputs we'll need when submitting a photo to S3.
