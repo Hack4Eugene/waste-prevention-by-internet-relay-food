@@ -5,7 +5,6 @@
 
 const util = require('util');
 const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
 const Post = mongoose.models.Post;
 const User = mongoose.models.User;
 
@@ -37,51 +36,48 @@ module.exports = {
 function listPosts(req, res) {
   const offset = req.swagger.params.offset.value;
   const limit = req.swagger.params.limit.value;
-  const find = Post.find();
+  // Order results by descending creation date
+  const find = Post.find().sort({ creationDate: -1 });
   if (limit) {
     find.limit(limit);
   }
   if (offset) {
     find.skip(offset);
   }
-  find.exec().then( function (data) {
-    res.status(200).json(data);
+  find.then( function (data) {
+    res.status(200).send(data);
   }).catch( function (error) {
-    console.log("** error: " + util.inspect(error));
-    res.status(500).send("Unexpected error: " + util.inspect(error));
+    res.status(500).send('Unexpected error: ' + util.inspect(error));
   });
 }
 
 function search(req, res) {
   const searchParams = req.body;
   const countQuery = buildFindQuery(searchParams);
+  const findQuery = buildFindQuery(searchParams);
   let count;
-  console.log("** searchParams: " + util.inspect(searchParams));
   countQuery.count().then( function (howMany) {
     count = howMany;
-    const find = buildFindQuery(searchParams);
     if (searchParams.limit) {
-      find.limit(searchParams.limit);
+      findQuery.limit(searchParams.limit);
     }
     if (searchParams.offset) {
-      find.skip(searchParams.offset);
+      findQuery.skip(searchParams.offset);
     }
-    return find.exec();
+    return findQuery.exec();
   }).then( function (data) {
     const responseObj = {
       matchCount: count,
       results: data
     };
-    console.log("** done: " + util.inspect(responseObj));
-    res.status(200).json(responseObj);
+    res.status(200).send(responseObj);
   }).catch( function (error) {
-    console.log("** error: " + util.inspect(error));
-    res.status(500).send("Unexpected error: " + util.inspect(error));
+    res.status(500).send('Unexpected error: ' + util.inspect(error));
   });
 }
 
 function buildFindQuery(searchParams) {
-  const find = Post.find();
+  const find = Post.find().sort({ creationDate: -1 }); // Order by descending creation date
   if (searchParams.query) {
     find.or([{"title": new RegExp(searchParams.query, 'i')}, {"description": new RegExp(searchParams.query, 'i')}]);
   }
@@ -89,7 +85,6 @@ function buildFindQuery(searchParams) {
 }
 
 function getPost(req, res) {
-  // constiables defined in the Swagger document can be referenced using req.swagger.params.{parameter_name}
   const postId = req.swagger.params.postId.value;
 
   if (postId == null) {
@@ -97,84 +92,69 @@ function getPost(req, res) {
     return;
   }
 
-  Post.findOne({ _id: postId }, function(error, post) {
-        if (error) {
-            console.error('Error finding post', error);
-            res.status(500).send(util.inspect(error));
-        } else if (!post) {
-            res.status(404).send('Could not find a post with that ID');
-        } else {
-            res.status(200).json(post);
-        }
-     });
+  Post.findOne({ _id: postId }).then( function(post) {
+    if (!post) {
+      res.status(404).send('Could not find a post with that ID');
+    } else {
+      res.status(200).send(post);
+    }
+  }).catch( function (error) {
+    res.status(500).send(util.inspect(error));
+  });
 }
 
-// Called before verification
 function addPost(req, res) {
-    var authHeader = req.header("Authorization");
-    var email = getEmailFromToken(authHeader, req, res, authHeader, addPostVerified);
-}
-
-function getEmailFromToken(token, req, res, callback) {
-
-  const authKey = "-----BEGIN CERTIFICATE-----\nMIIC9TCCAd2gAwIBAgIJT/D4Z70A53iZMA0GCSqGSIb3DQEBCwUAMBgxFjAUBgNVBAMTDWlyZi5hdXRoMC5jb20wHhcNMTgwNDA3MDY0MDAFWhcNMzExMjE1MDY0MDA4WjAYMRYwFAYDVQQDEw1pcmYuYXV0aDAuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwnl3R1vlP7G63vk5vTwdG7XKIJRyOtw38jkVpZ754JMhr7cxIefb6cqrhmmVA2atB90P5sQILVdfq4Jo7y+dBBGL6ZtnPSUnWWvISMCYsJi0Wbbc4HlZZMlC3hLP2isZL70RLcBJWQbuAFM5XH8nutJTjqj1KQbjxMkn5892JQMuchtjr6iTnIu00bFy/7lWm6pIWAAKICFkvntXadEQhEt6CHA9QcRLuUy2bOjgHFY+CBqFVfzlJ/kfvNISeuf8Rp0h1v7kaB2r4wGAEx5DK28EKCp3ZDeqvrHEPeHc6UA/e0Y8Oi2dfdMyphvjwLl0lKIBi8MJmelAbqzOtensiQIDAQABo0IwQDAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBTDk/6ggHGnZgmQGjQpsojN2RzphDAOBgNVHQ8BAf8EBAMCAoQwDQYJKoZIhvcNAQELBQADggEBAKmB4lF5cFNFpn8tuZEVbILvzkGwxTXy2zz8IPStrCLa8YCyjQjcsKF3kss+Oay8WbXqjEIIsc0Kzox/Z0GfbUdgThv1ADzu8DQLDmoyyBTUAErbjo9yflVKqiwY7mT7KzN6CaT6e6h9wpWKKbjPSXjRZfxR1+NGENx3/wytA3zirWhv9/hxz3hxC7d6nu75MJGkWomoYS7d8uvOQR6Lt+QMJJqlc05qMRkCPflvq4ik1CYO6GTfHZp+TYfL5tOlZBo8GzVZVqK0Dtt710d5jftzn6j8iv2pSuy/ydxzhsD8bhDMDCIgMQEJ/5DbdKK7g/ZRUuqNBCS+JWaR9dBaPAI=\n-----END CERTIFICATE-----";
-
- console.log("Verifying token: " + token);
- token = token.replace(/bearer /i, "");
- jwt.verify(token, authKey, { "algorithms": [ "RS256", "HS256" ], "issuer": "https://irf.auth0.com/" }, function (err, decoded) {
-   if (err) {
-     console.log("Error parsing token: " + err);
-     throw err;
-     return null;
-   } else {
-     addPostVerified(req, res, decoded.email);
-   }
-
- });
-};
-
-function addPostVerified(req, res, email) {
-  if (email == "error") {
-    return;
-  }
-
-    console.log("add post: " + util.inspect(req.body));
-    const post = Post(req.body);
-    post.email = email;
-    console.log("post: " + util.inspect(post));
-    post.save(function (error) {
-      if (error) {
-        res.status(500).send('Error saving new post: ' + util.inspect(error));
-      } else {
-        res.status(200).end(); // No body will be sent
-      }
-    });
+  // Create the post
+  const post = Post(req.body);
+  // Make sure to add the email address that we received in the auth token.
+  post.email = req.user.email;
+  post.save().then( function (post) {
+    res.status(204).end(); // No body will be sent
+  }).catch( function (error) {
+    res.status(500).send('Unexpected error: ' + util.inspect(error));
+  });
 }
 
 function updatePost(req, res) {
+  const post = Post(req.body);
+  // Make sure the user is updating their own post.
+  if (post.email !== req.user.email) {
+    res.status(403).send('Users can only update their own posts.');
+    return;
+  }
 
-    const post = Post(req.body);
-    post.save(function (error) {
-      if (error) {
-        res.status(500).send('Error updating post: ' + util.inspect(error));
-      } else {
-        res.status(200).end(); // No body will be sent
-      }
-    });
-
+  post.save().then( function (post) {
+    res.status(500).send('Error updating post: ' + util.inspect(error));
+  }).catch( function (error) {
+    res.status(200).end(); // No body will be sent
+  });
 }
 
 function deletePost(req, res) {
-
-    const postId = req.swagger.params.postId.value;
-    Post.remove({ _id: postId }, function (error) {
-      if (error) {
-        res.status(500).send('Error deleting post: ' + util.inspect(error));
-      } else {
-        res.status(200).end(); // No body will be sent
-      }
-    });
-
+  const postId = req.swagger.params.postId.value;
+  Post.findOne({ _id: postId }).then( function (post) {
+    if (!post) {
+      const error = new Error('Post not found.');
+      error.class = 'not found';
+      throw error;
+    } else if (post.email !== req.user.email) {
+      const error = new Error('Users may only delete their own posts.');
+      error.class = 'permission denied';
+      throw error;
+    }
+    // Everything looks good.  Go ahead and delete the post.
+    return Post.remove({ _id: postId });
+  }).then( function () {
+    res.status(200).end(); // No body will be sent
+  }).catch( function (error) {
+    if (error.class == 'not found') {
+      res.status(404).send('Post not found.');
+    } else if (error.class === 'permission denied') {
+      res.status(403).send('Users may only delete their own posts.');
+    } else {
+      res.status(500).send('Unexpected error: ' + util.inspect(error));
+    }
+  });
 }
 
 function validateUpload(req, res) {
@@ -184,34 +164,36 @@ function validateUpload(req, res) {
     return;
   }
 
-  Photo.findOne({ hash: hash }, function(error, photo) {
+  Photo.findOne({ hash: hash }).then( function(photo) {
     if (photo) {
-      res.status(409).send('A photo with that hash value already exists in the database.');
-    } else {
-      // The photo does not exist, so we need to get a signature we can use to post the track to S3
-
-      const params = {
-        Fields: {
-          key: hash
-        },
-        Bucket: 'irf-pics',
-      };
-
-      s3.createPresignedPost(params, function (error, data) {
-        if (error) {
-          console.error('Presigning post data encountered an error', error);
-          res.status(500).send(util.inspect(error));
-        } else {
-          const formAttributes = {
-            action: data.url,
-            method: "POST",
-            enctype: "multipart/form-data"
-          };
-          res.status(200).json({ formAttributes: formAttributes, formInputs: data.fields });
-        }
-      })
-
+      const error = new Error('A photo with that hash value already exists.');
+      error.class = 'hash exists';
+      throw error;
     }
-  });
 
+    // The photo does not exist, so we need to get a signature we can use to post the track to S3
+    const params = {
+      Fields: {
+        key: hash
+      },
+      Bucket: 'irf-pics',
+    };
+
+    // TODO: can we get a promise from AWS operations
+    s3.createPresignedPost(params, function (error, data) {
+      if (error) {
+        res.status(500).send('Unexpected error: ' + util.inspect(error));
+      } else {
+        const formAttributes = {
+          action: data.url,
+          method: "POST",
+          enctype: "multipart/form-data"
+        };
+        res.status(200).json({ formAttributes: formAttributes, formInputs: data.fields });
+      }
+    });
+  }).catch( function (error) {
+    res.status(500).send('Unexpected error: ' + util.inspect(error));
+  });
 }
+

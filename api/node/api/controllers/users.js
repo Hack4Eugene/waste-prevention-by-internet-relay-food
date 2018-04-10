@@ -5,12 +5,10 @@
 
 const util = require('util');
 const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
 
 const User = mongoose.models.User;
 const Post = mongoose.models.Post;
 
-// Set up the autoincrement for trackID
 // Expose API endpoints
 module.exports = {
   addUser: addUser,
@@ -18,81 +16,76 @@ module.exports = {
   deleteUser: deleteUser,
   getUser: getUser,
   getUserByEmail: getUserByEmail,
-  getPosts: getPosts
+  getPosts: getPosts,
+  getPostsByEmail: getPostsByEmail
 };
 
 // Endpoint implementations
+function addUser(req, res) {
+  const user = User(req.body);
 
-
-function addUserVerified(req, res, email) {
-  const user = User({"username" : email, "role" : "user", "created" : "to-be-implented", "email": email});
-
-  User.findOne({ username: user.username}).then( function (existing) {
+  User.findOne({ email: user.email }).then( function (existing) {
     if (existing) {
-      throw "Username '" + user.username + "' is taken.";
+      const error = new Error('There is already a user with email address ' + user.email);
+      error.class = 'email exists';
+      throw error;
     }
     return Promise.resolve(false);
-  }).then( function (encryptedPassword) {
+  }).then( function () {
+    // Make sure the creation date is correct
+    user.created = new Date().toISOString();
     return user.save();
-  }).then( function (data) {
-    console.log("User " + email + " created")
+  }).then( function () {
     res.status(200).end(); // No body will be sent
   }).catch( function (error) {
-    res.status(500).send('Error adding user: ' + util.inspect(error));
+    if (error.class === 'email exists') {
+      res.status(400).send(error.message);
+    } else {
+      res.status(500).send('Unexpected error: ' + util.inspect(error));
+    }
   });
 }
 
-// Called before verification
-function addUser(req, res) {
-    var authHeader = req.header("Authorization");
-    var email = getEmailFromToken(authHeader, req, res, authHeader, addUserVerified);
-}
-
-function getEmailFromToken(token, req, res, callback) {
-
-  const authKey = "-----BEGIN CERTIFICATE-----\nMIIC9TCCAd2gAwIBAgIJT/D4Z70A53iZMA0GCSqGSIb3DQEBCwUAMBgxFjAUBgNVBAMTDWlyZi5hdXRoMC5jb20wHhcNMTgwNDA3MDY0MDA4WhcNMzExMjE1MDY0MDA4WjAYMRYwFAYDVQQDEw1pcmYuYXV0aDAuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwnl3R1vlP7G63vk5vTwdG7XKIJRyOtw38jkVpZ754JMhr7cxIefb6cqrhmmVA2atB90P5sQILVdfq4Jo7y+dBBGL6ZtnPSUnWWvISMCYsJi0Wbbc4HlZZMlC3hLP2isZL70RLcBJWQbuAFM5XH8nutJTjqj1KQbjxMkn5892JQMuchtjr6iTnIu00bFy/7lWm6pIWAAKICFkvntXadEQhEt6CHA9QcRLuUy2bOjgHFY+CBqFVfzlJ/kfvNISeuf8Rp0h1v7kaB2r4wGAEx5DK28EKCp3ZDeqvrHEPeHc6UA/e0Y8Oi2dfdMyphvjwLl0lKIBi8MJmelAbqzOtensiQIDAQABo0IwQDAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBTDk/6ggHGnZgmQGjQpsojN2RzphDAOBgNVHQ8BAf8EBAMCAoQwDQYJKoZIhvcNAQELBQADggEBAKmB4lF5cFNFpn8tuZEVbILvzkGwxTXy2zz8IPStrCLa8YCyjQjcsKF3kss+Oay8WbXqjEIIsc0Kzox/Z0GfbUdgThv1ADzu8DQLDmoyyBTUAErbjo9yflVKqiwY7mT7KzN6CaT6e6h9wpWKKbjPSXjRZfxR1+NGENx3/wytA3zirWhv9/hxz3hxC7d6nu75MJGkWomoYS7d8uvOQR6Lt+QMJJqlc05qMRkCPflvq4ik1CYO6GTfHZp+TYfL5tOlZBo8GzVZVqK0Dtt710d5jftzn6j8iv2pSuy/ydxzhsD8bhDMDCIgMQEJ/5DbdKK7g/ZRUuqNBCS+JWaR9dBaPAI=\n-----END CERTIFICATE-----";
-
- //console.log("Verifying token: " + token);
- token = token.replace(/bearer /i, "");
- jwt.verify(token, authKey, { "algorithms": [ "RS256", "HS256" ], "issuer": "https://irf.auth0.com/" }, function (err, decoded) {
-   if (err) {
-     throw err;
-     return null;
-   } else {
-     addUserVerified(req, res, decoded.email);
-   }
-
- });
-};
-
 function updateUser(req, res) {
-  // TODO: Permission check
-  // TODO: validation?
   const user = User(req.body);
+  // Make sure this is an update for the user's own account
+  if (req.user.email !== user.email) {
+    res.status(403).send('You can only modify your own user record.');
+    return;
+  }
+  user.save().then( function (doc) {
+    res.status(204).end(); // Nothing in the body
+  }).catch( function (error) {
+    res.status(500).send('Unexpected error: ' + util.inspect(error));
+  });
 }
 
 function deleteUser(req, res) {
-  // TODO: Persmissions check
-  let userId = req.swagger.params.userId.value;
-  if (userId == null) {
-    res.status(400).send('No user ID specified.');
+  let email = req.swagger.params.email.value;
+  if (email == null) {
+    res.status(400).send('No email specified.');
+    return;
+  } else if (req.user.email !== email) {
+    res.status(403).send('You can only delete your own user account.');
     return;
   }
-  User.findOne({ _id: mongoose.Types.ObjectID(userId) })
-    .exec()
-    .then( function (user) {
-      if (user == null) {
-        res.status(404).send('Could not find a user with that user ID.')
-      } else {
-        User.remove({ _id: mongoose.Types.ObjectID(userId) }, function(err) {
-          if (!err) {
-            res.status(204).send();
-          } else {
-            res.status(500).send('Error: ' + util.inspect(err));
-          }
-        });
-      }
-    });
+
+  User.findOne({ email: email }).then( function (user) {
+    if (!user) {
+      const error = new Error('Could not find a user with that user ID.')
+      error.class = 'no such user';
+      throw error;
+    }
+    return User.remove({ email: email });
+  }).then( function() {
+     res.status(204).send();
+  }).catch( function (error) {
+     if (error.class === 'no such user') {
+       res.status(400).send('There is no user with that email address.');
+     } else {
+       res.status(500).send('Unexpected error: ' + util.inspect(err));
+     }
+  });
 }
 
 function getUser(req, res) {
@@ -102,17 +95,15 @@ function getUser(req, res) {
     return;
   }
 
-  User.findOne({ _id: mongoose.Types.ObjectID(userId) })
-    .exec()
-    .then( function (user) {
-      if (user == null) {
-        res.status(404).send('Could not find a user with that user ID.')
-      } else {
-        res.status(200).json(user);
-      }
-    }).catch( function (error) {
-      res.status(500).send('Unexpected error: ' + util.inspect(error));
-    });
+  User.findOne({ _id: mongoose.Types.ObjectID(userId) }).then( function (user) {
+    if (user == null) {
+      res.status(404).send('No user with that ID exists.');
+    } else {
+      res.status(200).send(user);
+    }
+  }).catch( function (error) {
+    res.status(500).send('Unexpected error: ' + util.inspect(error));
+  });
 }
 
 function getUserByEmail(req, res) {
@@ -122,44 +113,39 @@ function getUserByEmail(req, res) {
     return;
   }
 
-  User.findOne({ email: email })
-    .exec()
-    .then( function (user) {
-      if (user == null) {
-        res.status(404).send('Could not find a user with that email.')
-      } else {
-        res.status(200).json(user);
-      }
-    }).catch( function (error) {
-      res.status(500).send('Unexpected error: ' + util.inspect(error));
-    });
-}
-
-function getPosts(req, res) {
-  let email = getEmailFromToken(req.header("Authorization"));
-  if (!email) {
-    res.status(403).send("Authentication required");
-    return;
-  }
-  Post.find({ email: email }, function(err, posts) {
-    if (err) {
-      res.status(500).send("Error: " + util.inspect(err));
+  User.findOne({ email: email }).then( function (user) {
+    if (user == null) {
+      res.status(404).send('Could not find a user with that email.')
     } else {
-      res.status(200).send(posts);
+      res.status(200).send(user);
     }
+  }).catch( function (error) {
+    res.status(500).send('Unexpected error: ' + util.inspect(error));
   });
 }
 
-function getEmailFromToken(token) {
+function getPosts(req, res) {
+  if (!req.user.email) {
+    res.status(400).send('No email address provided in user token.');
+    return;
+  }
+  Post.find({ email: req.user.email }).then( function(posts) {
+    res.status(200).send(posts);
+  }).catch( function (error) {
+    res.status(500).send('Unexpected error: ' + util.inspect(error));
+  });
+}
 
-  const authKey = "-----BEGIN CERTIFICATE-----\nMIIC9TCCAd2gAwIBAgIJT/D4Z70A53iZMA0GCSqGSIb3DQEBCwUAMBgxFjAUBgNVBAMTDWlyZi5hdXRoMC5jb20wHhcNMTgwNDA3MDY0MDA4WhcNMzExMjE1MDY0MDA4WjAYMRYwFAYDVQQDEw1pcmYuYXV0aDAuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwnl3R1vlP7G63vk5vTwdG7XKIJRyOtw38jkVpZ754JMhr7cxIefb6cqrhmmVA2atB90P5sQILVdfq4Jo7y+dBBGL6ZtnPSUnWWvISMCYsJi0Wbbc4HlZZMlC3hLP2isZL70RLcBJWQbuAFM5XH8nutJTjqj1KQbjxMkn5892JQMuchtjr6iTnIu00bFy/7lWm6pIWAAKICFkvntXadEQhEt6CHA9QcRLuUy2bOjgHFY+CBqFVfzlJ/kfvNISeuf8Rp0h1v7kaB2r4wGAEx5DK28EKCp3ZDeqvrHEPeHc6UA/e0Y8Oi2dfdMyphvjwLl0lKIBi8MJmelAbqzOtensiQIDAQABo0IwQDAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBTDk/6ggHGnZgmQGjQpsojN2RzphDAOBgNVHQ8BAf8EBAMCAoQwDQYJKoZIhvcNAQELBQADggEBAKmB4lF5cFNFpn8tuZEVbILvzkGwxTXy2zz8IPStrCLa8YCyjQjcsKF3kss+Oay8WbXqjEIIsc0Kzox/Z0GfbUdgThv1ADzu8DQLDmoyyBTUAErbjo9yflVKqiwY7mT7KzN6CaT6e6h9wpWKKbjPSXjRZfxR1+NGENx3/wytA3zirWhv9/hxz3hxC7d6nu75MJGkWomoYS7d8uvOQR6Lt+QMJJqlc05qMRkCPflvq4ik1CYO6GTfHZp+TYfL5tOlZBo8GzVZVqK0Dtt710d5jftzn6j8iv2pSuy/ydxzhsD8bhDMDCIgMQEJ/5DbdKK7g/ZRUuqNBCS+JWaR9dBaPAI=\n-----END CERTIFICATE-----";
+function getPostsByEmail(req, res) {
+  const email = req.swagger.params.email.value;
+  if (!email) {
+    res.status(400).send('No email address was given');
+  }
 
- console.log("Verifying token: " + token);
- token = token.replace(/bearer /i, "");
- const decoded = jwt.verify(token, authKey, { "algorithms": [ "RS256", "HS256" ], "issuer": "https://irf.auth0.com/" });
- if (decoded) {
-   return decoded.email;
- } else {
-   return null;
- }
-};
+  Post.find({ email: email }).then( function(posts) {
+    res.status(200).send(posts);
+  }).catch( function (error) {
+    res.status(500).send('Unexpected error: ' + util.inspect(error));
+  });
+}
+

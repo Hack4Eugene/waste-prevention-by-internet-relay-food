@@ -14,8 +14,8 @@ paths:
     get:
       tags:
         - Notifications
-      summary: gets all notifications that a user is set to receive
-      operationId : listNotification
+      summary: Gets all notifications that a user is set to receive.
+      operationId : listNotifications
       produces:
         - application/json
       parameters:
@@ -37,7 +37,7 @@ paths:
     delete:
       tags:
         - Notifications
-      summary: deletes all notifications that a user is set to receieve
+      summary: Deletes all notifications that a user is set to receieve.
       operationId: deleteAllNotifications
       parameters: []
       responses:
@@ -208,13 +208,15 @@ paths:
       operationId: addUser
       consumes:
         - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/User'
       responses:
         '200':
           description: Success.
-        '400':
-          description: Invalid request.
-          schema:
-            type: string
   '/users/{userId}':
     x-swagger-router-controller: users
     get:
@@ -284,10 +286,31 @@ paths:
     get:
       tags:
         - Users
-      summary: Get all posts for a user.
+      summary: Get all posts for the logged in user.
       operationId: getPosts
       produces:
         - application/json
+      responses:
+        '200':
+          description: Success.
+          schema:
+            type: array
+            items:
+             $ref: '#/definitions/Post'
+  '/users/posts/{email}':
+    x-swagger-router-controller: users
+    get:
+      tags:
+        - Users
+      summary: Get all posts for a user.
+      operationId: getPostsByEmail
+      produces:
+        - application/json
+      parameters:
+        - name: email
+          in: path
+          required: true
+          type: string
       responses:
         '200':
           description: Success.
@@ -412,13 +435,12 @@ definitions:
   User:
     type: object
     required:
-      - username
       - email
       - role
     properties:
       username:
         type: string
-        description: The user's name.
+        description: The user's displayed name.
       email:
         type: string
         description: The user's email address.
