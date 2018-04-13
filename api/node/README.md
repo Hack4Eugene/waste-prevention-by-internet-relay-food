@@ -22,6 +22,6 @@ documentation based on what's in the swagger file at this URL:
 
 There are three main points of interest:
 * [app.js](app.js) -- The entry point, where we initialize things
-* [api/controllers](controllers) -- The controller files referenced in the API spec
-* [api/models](models) -- The data models used to interact with the database
+* [controllers](api/controllers) -- The controller files referenced in the API spec
+* [models](api/models) -- The data models used to interact with the database
 
