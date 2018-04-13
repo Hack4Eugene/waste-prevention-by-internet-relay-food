@@ -25,3 +25,6 @@ There are three main points of interest:
 * [controllers](api/controllers) -- The controller files referenced in the API spec
 * [models](api/models) -- The data models used to interact with the database
 
+Authentication is handled by verifying a JSON Web Token, like the ones issued by Auth0.
+Endpoints that require authentication are called out in [app.js](app.js).  In order to change
+the certificate used to verify the tokens, you'll need to update [tokenUtils.js](tokenUtils.js).
