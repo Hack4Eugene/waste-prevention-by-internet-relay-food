@@ -14,6 +14,7 @@ The project consists of these components:
 
 Team Members:
 * Alex Anderson
+* Alexandr Iapara
 * Andrew Dalcher
 * Anna Sablan
 * Anne C
@@ -24,4 +25,3 @@ Team Members:
 * Melville Stanley
 * Mité Tashev
 * Raleigh Foster
-* Spectrum Fenix
